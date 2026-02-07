@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/nosotros", "dest": "/nosotros.html" },
+    { "src": "/contacto", "dest": "/contacto.html" },
+    { "src": "/privacidad", "dest": "/privacidad.html" },
+    { "src": "/terminos", "dest": "/terminos.html" }
+  ]
+}
