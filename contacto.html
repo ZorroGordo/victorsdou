@@ -209,6 +209,36 @@ select:focus{border-color:#3E582F;outline:none}
             <input type="email" name="correo" class="form-input" required>
           </div>
         </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Empresa / Negocio</label>
+            <input type="text" name="empresa" class="form-input" placeholder="Nombre de tu empresa o negocio">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tipo de negocio</label>
+            <select name="tipo" class="form-input" style="appearance:auto;cursor:pointer">
+              <option value="">Selecciona una opción</option>
+              <option value="restaurante">Restaurante</option>
+              <option value="hotel">Hotel</option>
+              <option value="cafe">Café / Cafetería</option>
+              <option value="supermercado">Supermercado / Tienda</option>
+              <option value="catering">Catering / Eventos</option>
+              <option value="consumidor">Consumidor final (B2C)</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Volumen mensual estimado</label>
+          <select name="volumen" class="form-input" style="appearance:auto;cursor:pointer">
+            <option value="">Selecciona una opción</option>
+            <option value="prueba">Solo muestras / prueba</option>
+            <option value="bajo">1-50 unidades/mes</option>
+            <option value="medio">50-200 unidades/mes</option>
+            <option value="alto">200-500 unidades/mes</option>
+            <option value="mayorista">500+ unidades/mes</option>
+          </select>
+        </div>
         <div class="form-group">
           <label class="form-label">Producto de interés</label>
           <input type="text" name="producto" class="form-input" placeholder="Ej: Pan de masa madre, Pizza, Pasteles">
@@ -218,6 +248,7 @@ select:focus{border-color:#3E582F;outline:none}
           <textarea name="mensaje" class="form-textarea" required></textarea>
         </div>
         <button type="submit" class="form-submit">ENVIAR</button>
+        <p style="text-align:center;color:#3E582F;font-size:.8rem;margin-top:1rem;letter-spacing:.05em">⏱ Respondemos en 24 horas hábiles</p>
       </form>
     </div>
   </div>
