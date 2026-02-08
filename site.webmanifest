@@ -1,0 +1,19 @@
+{
+  "name": "Victorsdou \u2014 Panader\u00eda N\u00f3rdica de Masa Madre",
+  "short_name": "Victorsdou",
+  "icons": [
+    {
+      "src": "assets/images/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#3E582F",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

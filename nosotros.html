@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nosotros — Victorsdou</title>
+<link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#3E582F">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -146,7 +152,7 @@ a{text-decoration:none;color:inherit}
 .footer-grid{display:grid;grid-template-columns:1fr;gap:3rem}
 @media(min-width:768px){.footer-grid{grid-template-columns:1fr 1fr}}
 @media(min-width:1024px){.footer-grid{grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem}}
-.footer h3{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:#fff;margin-bottom:1.5rem;font-weight:500}
+.footer h3{font-size:.875rem;letter-spacing:.25em;text-transform:uppercase;color:#fff;margin-bottom:1.5rem;font-weight:500}
 .footer ul{list-style:none;display:flex;flex-direction:column;gap:.75rem}
 .footer ul a{font-size:.875rem;color:#A0A0A0;transition:color .3s}
 .footer ul a:hover{color:#fff}
@@ -163,6 +169,23 @@ a{text-decoration:none;color:inherit}
 .whatsapp{position:fixed;bottom:1.5rem;right:1.5rem;z-index:50;width:3.5rem;height:3.5rem;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:all .3s}
 .whatsapp:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(0,0,0,.2)}
 .whatsapp svg{width:1.75rem;height:1.75rem;color:#fff}
+
+/* STATS */
+.stats{background:#F5F2ED;padding:3rem 1.5rem}
+.stats-inner{max-width:72rem;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;text-align:center}
+@media(min-width:640px){.stats-inner{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:768px){.stats-inner{grid-template-columns:repeat(5,1fr);gap:1.5rem}}
+.stat-item{display:flex;flex-direction:column;gap:.25rem}
+.stat-number{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;color:#1A1A1A}
+.stat-label{font-size:.75rem;color:#666;letter-spacing:.1em;text-transform:uppercase}
+
+/* NOSOTROS CTA */
+.nosotros-cta{background:#3E582F;padding:5rem 1.5rem;text-align:center}
+.nosotros-cta-inner{max-width:42rem;margin:0 auto}
+.nosotros-cta h2{color:#fff;font-size:clamp(1.5rem,3vw,2rem);margin-bottom:1rem}
+.nosotros-cta p{color:rgba(255,255,255,.8);font-size:1rem;line-height:1.7;margin-bottom:2rem}
+.nosotros-cta .btn{background:#fff;color:#1A1A1A}
+.nosotros-cta .btn:hover{background:#F5F2ED}
 </style>
 </head>
 <body>
@@ -213,6 +236,32 @@ a{text-decoration:none;color:inherit}
     <p class="hero-subtitle">NOSOTROS</p>
     <h1 class="hero-heading">Una panadería nórdica de masa madre</h1>
   </div>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Años de operación</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">+25</span>
+      <span class="stat-label">Clientes B2B atendidos</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">+1,000</span>
+      <span class="stat-label">Clientes B2C directos</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">+100K</span>
+      <span class="stat-label">Productos producidos al año</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">+40</span>
+      <span class="stat-label">Tiendas venden nuestros productos</span>
+    </div>
+  </div>
+</section>
 </section>
 
 <!-- NUESTRA HISTORIA -->
@@ -406,6 +455,16 @@ a{text-decoration:none;color:inherit}
     <div class="test-dots">
       <span></span><span></span><span></span>
     </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="nosotros-cta">
+  <div class="nosotros-cta-inner">
+    <h2 class="serif">¿Quieres ser parte de nuestros clientes?</h2>
+    <p>Únete a los más de 25 negocios que confían en Victorsdou como su proveedor de pan artesanal.</p>
+    <a href="https://wa.me/51915092300?text=Hola%2C%20visit%C3%A9%20la%20p%C3%A1gina%20de%20Victorsdou%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20c%C3%B3mo%20trabajar%20juntos." target="_blank" rel="noopener noreferrer" class="btn">Conversemos</a>
   </div>
 </section>
 
