@@ -236,6 +236,9 @@ a{text-decoration:none;color:inherit}
 .card-excerpt{color:#666;font-size:.85rem;line-height:1.6;margin-bottom:1.25rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .card-link{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:#1A1A1A;transition:color .3s}
 .card-link:hover{color:#3E582F}
+
+/* FIX: Prevent horizontal overflow on mobile */
+html,body{overflow-x:hidden;max-width:100vw}
 </style>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -257,22 +260,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="nav-inner">
     <div class="nav-desktop">
       <div class="nav-left">
-        <a href="recetas.html" class="nav-link">RECETAS</a>
-        <a href="blog.html" class="nav-link">BLOG</a>
+        <a href="/recetas" class="nav-link">RECETAS</a>
+        <a href="/blog" class="nav-link">BLOG</a>
       </div>
-      <a href="index.html">
+      <a href="/">
         <svg class="nav-logo" viewBox="0 0 238 41" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M27.49 18.67s2.84 8.9 7.3 13.56c2.81 2.95 7.75 2.38 9.64-1.23l.12-.23c.07-.15.13-.31.18-.46.2-.71.75-2.95 1.1-6.64 0 0 .61-5.34 1.71-7.08.31-.5.44-1.1.23-1.65a1.88 1.88 0 0 0-1.5-.95s-2.76-.56-4.7 8.65c0 0-.88 5.13-1.32 7.19 0 0-.44 1.61-2.42-.44 0 0-3.01-3.08-6.82-11.59l-1.35-3.24a3.39 3.39 0 0 0-1.18-1.47 2.08 2.08 0 0 0-1.91.56c-.34.71-.33 1.54-.07 2.27l.99 2.76z" fill="white"/><path d="M54.23 16.18c.1 2.26.58 12.5 1.49 16.69a2.34 2.34 0 0 0 2.94 1.66l.06-.02c.27-.11.47-.36.55-.64.12-.44.21-1.22-.06-2.28-.09-.34-.13-.7-.17-1.05l-1.1-11.84a7.28 7.28 0 0 0-1.79-4.04c-.73-.76-1.51-1.09-1.83.34-.08.39-.1.78-.08 1.17z" fill="white"/><path d="M53.14.85a2.5 2.5 0 0 1 2.33-.84c.87.07 1.68.5 2.3 1.12l.19.2c.37.43.54 1.02.36 1.56-.2.62-.84 1.3-2.72.96a2.1 2.1 0 0 0-.38-.03c-.29.01-.9.01-1.49-.19-1.16-.4-1.44-1.89-.58-2.76z" fill="white"/><path d="M84.03 29.33c.42-.37.92-.64 1.46-.79.67-.18 1.25-.1.44 1.2 0 0-3.18 5.83-12.95 4.98a4.3 4.3 0 0 1-.38-.03c-.85-.04-5.11-.51-6.98-6.37a16.19 16.19 0 0 1 .45-9.92 15.5 15.5 0 0 1 7.55-6.49c1.97-.42 3 1.43 2.1 3.24l-.1.2c-.28.46-.94.49-1.31.09l-.02-.02a2.01 2.01 0 0 0-2.13-.18l-.18.17s-5.2 4.55-3.81 9.9c.79 3.01 3.51 5.14 6.61 5.37 2.82.21 6.78.03 9.25-2.16z" fill="white"/><path d="M87.38 18.94s-4.34-11.39 1.53-10.12c0 0 2.13 0 1.62 10.12l7.8 1.72c.4.08.75.33.93.69.16.32.16.7-.48.91l-6.8-.37s-.69.15-.18 2.47c0 0 .4 3.37 1.86 4.78a3.2 3.2 0 0 1 .89 2.07c-.03.52-.2 1.04-.7 1.39a1.48 1.48 0 0 1-2.07-.26c-.98-1.04-2.68-3.69-4.15-10.24l-5.07-.07a5.9 5.9 0 0 1-2.16-.44c-.89-.39-1.6-1.02.1-1.82.68-.32 1.43-.48 2.18-.53l4.69-.28z" fill="white"/><path d="M104.61 19.41s-1.9.97-2.61 3.58c-1.46 5.28 2.57 10.44 7.96 9.46l.17-.03s10.29-1.47 5.14-11.57c0 0 0-5.5 2.17-3.42 0 0 3.95 7.95.86 13.54l-.81 1c-.95 1.17-3.57 4.21-10.55 3.82a8.07 8.07 0 0 1-5.68-2.33c-1.73-1.61-3.29-4.33-2.61-8.71 0 0 1.54-10.21 8.49-11.11 0 0 2.81-.5 6.02 5.13.22.38.37.79.42 1.23.09.67-.04 1.47-1.24 1.23a3.42 3.42 0 0 1-1.51-.86c-.92-.95-3.04-2.85-4.42-2.02l-1.81 1.08z" fill="white"/><path d="M120.47 26.97c.31.49.52 1.02.79 1.54 1.08 2.08 3 5.38 5.31 5.08 0 0 2.53.27 0-4.34l-1.57-3.18a8.22 8.22 0 0 1-.97-4.73c.17-2.32 1.27-5.02 5.43-5.28h5.88c.75 0 1.48-.35 1.87-.99.33-.54.33-1.15-.97-1.46 0 0-10.95-1.08-13.64 1.91 0 0-4.99 6.96-2.12 11.44z" fill="white"/><path d="M133.31 33.55l-.2.2c-.2.26-.89 1.36.41 2.06 0 0 7.24 2.29 13.13.62a5.08 5.08 0 0 0 3.43-1.43c1.14-1.13 2.21-2.96.45-5.07-.37-.45-.83-.82-1.32-1.12l-10.91-6.87s-1.87-1.02-.14-2.51c.4-.34 1.58-.87 1.85-.94.83-.21.58-.3 2.6-.43.91-.06 2.4-.08 3.31-.07h.94c1.23-.02 2.33-.89 2.46-2.12.08-.7-.16-1.36-1.17-1.59 0 0-4-1.26-6.96-1.24-2.61.02-5.04 1.47-6.12 3.85-.44.97-.68 2.12-.46 3.43.17 1.01.73 1.9 1.51 2.55 2.32 1.95 8.11 6.71 10.4 7.57 0 0 1.99 1.08.55 1.81 0 0-13-1.59-13.77-.68z" fill="white"/><path d="M164.59 19.68s-10.58 3.84-7.58 11.88a3.09 3.09 0 0 0 2.64 2.56c2.78-.07 8.2-.96 11.31-6.47a8.98 8.98 0 0 0 1.02-4.07c-.03-5.04.14-18.93 2.73-19.15 0 0 1.71-.72 1.63 2.62v18.9a9.05 9.05 0 0 0 .68 3.37c.87 1.94 2.84 4.24 7.29 4.05.55-.02 1.1.19 1.43.63.51.64.41 1.59-3.71 2.04 0 0-6.32.63-7.5-5.15 0 0-.63-4.7-2.44-1.81 0 0-1.99 4.12-7.62 6.85a9.58 9.58 0 0 1-5.01.85c-2.11-.06-4.72-.79-5.72-3.75-.32-.95-.37-1.96-.25-2.95.34-2.82 1.93-9.42 9.15-12.49 1.83-.78 3.92-.79 5.7.1 1.77.87 3.23 2.54 1.33 5.68 0 0-.09 1.61-1.88-1.46a3.37 3.37 0 0 0-2.28-1.59 2.04 2.04 0 0 0-.92.07z" fill="white"/><path d="M206.04 13.83a2.05 2.05 0 0 0-2.81-.44c-1.24 1.43-2.39 4.97.65 13.7 0 0 5.06 13.28 14.36 3.52 0 0 6.86 14.09 19.6 8.04 0 0 .87-.72-1.4-1.13-.47-.08-.95-.12-1.43-.14-2-.06-9.74-.73-12.9-7.08a7.07 7.07 0 0 1-.62-2.75V17.49c0-.89-.11-1.78-.36-2.63-.37-1.22-1.06-2.58-2.3-2.26-.63.16-1.08.72-1.18 1.37-.24 1.54-.68 5.28-.26 10.44.02.29-.02.58-.14.84-.54 1.23-2.35 4.72-5.61 4.73 0 0-4.29.84-5.11-8.69-.1-1.18-.12-2.37-.06-3.55.06-1 .06-2.7-.44-3.91z" fill="white"/><path d="M200.88 18.53c3.03 5 .96 9.67.96 9.67-2.11 3.97-5.84 5.06-8.57 5.27-2.47.2-4.9-.77-6.5-2.67-4.25-5.06-1.15-12.22.8-15.67.98-1.74 2.61-3.08 4.57-3.52 4.47-1.01 6.83 3.01 7.69 4.94.31.68.66 1.34 1.05 1.98zm-1.97 1.83a8.05 8.05 0 0 0-2.41-3.92c-1.71-1.67-4.53-3.33-6.71.9 0 0-2.7 4.09-1.64 8.72.68 2.94 3.6 4.87 6.49 4.03 1.38-.4 2.86-1.81 3.7-3.28.65-1.15.84-1.63.93-2.07.26-1.15.39-1.93-.37-4.4z" fill="white"/><path d="M10.59 12.49c1.07-.36 2.1-.54 3.1-.54 2.49 0 4.2.64 5.13 1.92.43.57 1 1.92 1.71 4.06.71 2.14 1.07 3.57 1.07 4.27 0 1.21-.5 2.33-1.5 3.37-1 1.03-2.07 1.55-3.2 1.55h-.43a2.67 2.67 0 0 0-2.46 2.36c-1.92 1.71-3.63 2.56-5.13 2.56-1.92 0-2.89-1.1-2.89-3.31 0-.5.07-1.25.21-2.25.64-3.2 2.31-5.02 5.02-5.45.93-.14 1.48-.2 1.66-.16.18.04.27.3.27.8 0 .64-.28.96-.85.96-.93 0-1.82.59-2.67 1.77-.86 1.18-1.29 2.37-1.29 3.58 0 .43.03.71.11.86.07.5.36.75.85.75.71 0 1.57-.43 2.56-1.28.93-.85 1.39-1.71 1.39-2.57v-.64c-.07-1.28.14-2.03.64-2.25.5-.14.98-.01 1.44.39.46.39.7.87.7 1.44 0 .79.36 1.18 1.07 1.18.43 0 .93-.18 1.5-.54.79-.43 1.18-1.07 1.18-1.92s-.39-2.89-1.18-4.67c-1.21-2.56-2.64-3.85-4.27-3.85-.5 0-.89.04-1.18.11-1.43.21-2.94.71-4.54 1.5a12.7 12.7 0 0 0-3.26 2.35C3.63 20.75 2.78 23.56 2.78 26.7c0 4.7 1.64 7.73 4.91 9.08.93.36 2.96.54 6.1.54 5.06 0 8.33-.32 9.83-.96.86-.36 1.43-.54 1.71-.54.36 0 .54.14.54.43 0 .71-.96 1.57-2.89 2.56-1.43.71-3.99 1.1-7.7 1.18h-1.6c-3.49 0-6-.25-7.53-.75s-2.87-1.53-4.01-3.1C1.43 33.53.71 30.83.71 27.26c0-4.56 1.1-8.12 3.31-10.69 1-1.21 3.43-2.49 7.27-3.84z" fill="white"/>
         </svg>
       </a>
       <div class="nav-right">
-        <a href="nosotros.html" class="nav-link">NOSOTROS</a>
-        <a href="contacto.html" class="nav-link">CONTACTO</a>
+        <a href="/nosotros" class="nav-link">NOSOTROS</a>
+        <a href="/contacto" class="nav-link">CONTACTO</a>
       </div>
     </div>
     <div class="nav-mobile">
       <div class="nav-spacer"></div>
-      <a href="index.html" class="nav-mobile-center">
+      <a href="/" class="nav-mobile-center">
         <svg class="nav-mobile-logo" viewBox="0 0 238 41" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M27.49 18.67s2.84 8.9 7.3 13.56c2.81 2.95 7.75 2.38 9.64-1.23l.12-.23c.07-.15.13-.31.18-.46.2-.71.75-2.95 1.1-6.64 0 0 .61-5.34 1.71-7.08.31-.5.44-1.1.23-1.65a1.88 1.88 0 0 0-1.5-.95s-2.76-.56-4.7 8.65c0 0-.88 5.13-1.32 7.19 0 0-.44 1.61-2.42-.44 0 0-3.01-3.08-6.82-11.59l-1.35-3.24a3.39 3.39 0 0 0-1.18-1.47 2.08 2.08 0 0 0-1.91.56c-.34.71-.33 1.54-.07 2.27l.99 2.76z" fill="white"/><path d="M54.23 16.18c.1 2.26.58 12.5 1.49 16.69a2.34 2.34 0 0 0 2.94 1.66l.06-.02c.27-.11.47-.36.55-.64.12-.44.21-1.22-.06-2.28-.09-.34-.13-.7-.17-1.05l-1.1-11.84a7.28 7.28 0 0 0-1.79-4.04c-.73-.76-1.51-1.09-1.83.34-.08.39-.1.78-.08 1.17z" fill="white"/><path d="M53.14.85a2.5 2.5 0 0 1 2.33-.84c.87.07 1.68.5 2.3 1.12l.19.2c.37.43.54 1.02.36 1.56-.2.62-.84 1.3-2.72.96a2.1 2.1 0 0 0-.38-.03c-.29.01-.9.01-1.49-.19-1.16-.4-1.44-1.89-.58-2.76z" fill="white"/><path d="M84.03 29.33c.42-.37.92-.64 1.46-.79.67-.18 1.25-.1.44 1.2 0 0-3.18 5.83-12.95 4.98a4.3 4.3 0 0 1-.38-.03c-.85-.04-5.11-.51-6.98-6.37a16.19 16.19 0 0 1 .45-9.92 15.5 15.5 0 0 1 7.55-6.49c1.97-.42 3 1.43 2.1 3.24l-.1.2c-.28.46-.94.49-1.31.09l-.02-.02a2.01 2.01 0 0 0-2.13-.18l-.18.17s-5.2 4.55-3.81 9.9c.79 3.01 3.51 5.14 6.61 5.37 2.82.21 6.78.03 9.25-2.16z" fill="white"/><path d="M87.38 18.94s-4.34-11.39 1.53-10.12c0 0 2.13 0 1.62 10.12l7.8 1.72c.4.08.75.33.93.69.16.32.16.7-.48.91l-6.8-.37s-.69.15-.18 2.47c0 0 .4 3.37 1.86 4.78a3.2 3.2 0 0 1 .89 2.07c-.03.52-.2 1.04-.7 1.39a1.48 1.48 0 0 1-2.07-.26c-.98-1.04-2.68-3.69-4.15-10.24l-5.07-.07a5.9 5.9 0 0 1-2.16-.44c-.89-.39-1.6-1.02.1-1.82.68-.32 1.43-.48 2.18-.53l4.69-.28z" fill="white"/><path d="M104.61 19.41s-1.9.97-2.61 3.58c-1.46 5.28 2.57 10.44 7.96 9.46l.17-.03s10.29-1.47 5.14-11.57c0 0 0-5.5 2.17-3.42 0 0 3.95 7.95.86 13.54l-.81 1c-.95 1.17-3.57 4.21-10.55 3.82a8.07 8.07 0 0 1-5.68-2.33c-1.73-1.61-3.29-4.33-2.61-8.71 0 0 1.54-10.21 8.49-11.11 0 0 2.81-.5 6.02 5.13.22.38.37.79.42 1.23.09.67-.04 1.47-1.24 1.23a3.42 3.42 0 0 1-1.51-.86c-.92-.95-3.04-2.85-4.42-2.02l-1.81 1.08z" fill="white"/><path d="M120.47 26.97c.31.49.52 1.02.79 1.54 1.08 2.08 3 5.38 5.31 5.08 0 0 2.53.27 0-4.34l-1.57-3.18a8.22 8.22 0 0 1-.97-4.73c.17-2.32 1.27-5.02 5.43-5.28h5.88c.75 0 1.48-.35 1.87-.99.33-.54.33-1.15-.97-1.46 0 0-10.95-1.08-13.64 1.91 0 0-4.99 6.96-2.12 11.44z" fill="white"/><path d="M133.31 33.55l-.2.2c-.2.26-.89 1.36.41 2.06 0 0 7.24 2.29 13.13.62a5.08 5.08 0 0 0 3.43-1.43c1.14-1.13 2.21-2.96.45-5.07-.37-.45-.83-.82-1.32-1.12l-10.91-6.87s-1.87-1.02-.14-2.51c.4-.34 1.58-.87 1.85-.94.83-.21.58-.3 2.6-.43.91-.06 2.4-.08 3.31-.07h.94c1.23-.02 2.33-.89 2.46-2.12.08-.7-.16-1.36-1.17-1.59 0 0-4-1.26-6.96-1.24-2.61.02-5.04 1.47-6.12 3.85-.44.97-.68 2.12-.46 3.43.17 1.01.73 1.9 1.51 2.55 2.32 1.95 8.11 6.71 10.4 7.57 0 0 1.99 1.08.55 1.81 0 0-13-1.59-13.77-.68z" fill="white"/><path d="M164.59 19.68s-10.58 3.84-7.58 11.88a3.09 3.09 0 0 0 2.64 2.56c2.78-.07 8.2-.96 11.31-6.47a8.98 8.98 0 0 0 1.02-4.07c-.03-5.04.14-18.93 2.73-19.15 0 0 1.71-.72 1.63 2.62v18.9a9.05 9.05 0 0 0 .68 3.37c.87 1.94 2.84 4.24 7.29 4.05.55-.02 1.1.19 1.43.63.51.64.41 1.59-3.71 2.04 0 0-6.32.63-7.5-5.15 0 0-.63-4.7-2.44-1.81 0 0-1.99 4.12-7.62 6.85a9.58 9.58 0 0 1-5.01.85c-2.11-.06-4.72-.79-5.72-3.75-.32-.95-.37-1.96-.25-2.95.34-2.82 1.93-9.42 9.15-12.49 1.83-.78 3.92-.79 5.7.1 1.77.87 3.23 2.54 1.33 5.68 0 0-.09 1.61-1.88-1.46a3.37 3.37 0 0 0-2.28-1.59 2.04 2.04 0 0 0-.92.07z" fill="white"/><path d="M206.04 13.83a2.05 2.05 0 0 0-2.81-.44c-1.24 1.43-2.39 4.97.65 13.7 0 0 5.06 13.28 14.36 3.52 0 0 6.86 14.09 19.6 8.04 0 0 .87-.72-1.4-1.13-.47-.08-.95-.12-1.43-.14-2-.06-9.74-.73-12.9-7.08a7.07 7.07 0 0 1-.62-2.75V17.49c0-.89-.11-1.78-.36-2.63-.37-1.22-1.06-2.58-2.3-2.26-.63.16-1.08.72-1.18 1.37-.24 1.54-.68 5.28-.26 10.44.02.29-.02.58-.14.84-.54 1.23-2.35 4.72-5.61 4.73 0 0-4.29.84-5.11-8.69-.1-1.18-.12-2.37-.06-3.55.06-1 .06-2.7-.44-3.91z" fill="white"/><path d="M200.88 18.53c3.03 5 .96 9.67.96 9.67-2.11 3.97-5.84 5.06-8.57 5.27-2.47.2-4.9-.77-6.5-2.67-4.25-5.06-1.15-12.22.8-15.67.98-1.74 2.61-3.08 4.57-3.52 4.47-1.01 6.83 3.01 7.69 4.94.31.68.66 1.34 1.05 1.98zm-1.97 1.83a8.05 8.05 0 0 0-2.41-3.92c-1.71-1.67-4.53-3.33-6.71.9 0 0-2.7 4.09-1.64 8.72.68 2.94 3.6 4.87 6.49 4.03 1.38-.4 2.86-1.81 3.7-3.28.65-1.15.84-1.63.93-2.07.26-1.15.39-1.93-.37-4.4z" fill="white"/><path d="M10.59 12.49c1.07-.36 2.1-.54 3.1-.54 2.49 0 4.2.64 5.13 1.92.43.57 1 1.92 1.71 4.06.71 2.14 1.07 3.57 1.07 4.27 0 1.21-.5 2.33-1.5 3.37-1 1.03-2.07 1.55-3.2 1.55h-.43a2.67 2.67 0 0 0-2.46 2.36c-1.92 1.71-3.63 2.56-5.13 2.56-1.92 0-2.89-1.1-2.89-3.31 0-.5.07-1.25.21-2.25.64-3.2 2.31-5.02 5.02-5.45.93-.14 1.48-.2 1.66-.16.18.04.27.3.27.8 0 .64-.28.96-.85.96-.93 0-1.82.59-2.67 1.77-.86 1.18-1.29 2.37-1.29 3.58 0 .43.03.71.11.86.07.5.36.75.85.75.71 0 1.57-.43 2.56-1.28.93-.85 1.39-1.71 1.39-2.57v-.64c-.07-1.28.14-2.03.64-2.25.5-.14.98-.01 1.44.39.46.39.7.87.7 1.44 0 .79.36 1.18 1.07 1.18.43 0 .93-.18 1.5-.54.79-.43 1.18-1.07 1.18-1.92s-.39-2.89-1.18-4.67c-1.21-2.56-2.64-3.85-4.27-3.85-.5 0-.89.04-1.18.11-1.43.21-2.94.71-4.54 1.5a12.7 12.7 0 0 0-3.26 2.35C3.63 20.75 2.78 23.56 2.78 26.7c0 4.7 1.64 7.73 4.91 9.08.93.36 2.96.54 6.1.54 5.06 0 8.33-.32 9.83-.96.86-.36 1.43-.54 1.71-.54.36 0 .54.14.54.43 0 .71-.96 1.57-2.89 2.56-1.43.71-3.99 1.1-7.7 1.18h-1.6c-3.49 0-6-.25-7.53-.75s-2.87-1.53-4.01-3.1C1.43 33.53.71 30.83.71 27.26c0-4.56 1.1-8.12 3.31-10.69 1-1.21 3.43-2.49 7.27-3.84z" fill="white"/>
         </svg>
@@ -286,10 +289,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="mobile-dropdown" id="mobileDropdown">
     <div class="mobile-dropdown-inner">
-      <a href="recetas.html" onclick="closeMenu()">RECETAS</a>
-      <a href="blog.html" onclick="closeMenu()">BLOG</a>
-      <a href="nosotros.html" onclick="closeMenu()">NOSOTROS</a>
-      <a href="contacto.html" onclick="closeMenu()">CONTACTO</a>
+      <a href="/recetas" onclick="closeMenu()">RECETAS</a>
+      <a href="/blog" onclick="closeMenu()">BLOG</a>
+      <a href="/nosotros" onclick="closeMenu()">NOSOTROS</a>
+      <a href="/contacto" onclick="closeMenu()">CONTACTO</a>
     </div>
   </div>
 </nav>
@@ -298,7 +301,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main>
 <!-- HERO -->
 
-<section class="hero-nosotros" style="background-image:url('https://victorsdou.pe/recetas/wp-content/uploads/2023/03/DSC00240-1160x653.jpg')">
+<section class="hero-nosotros" style="background-image:url('assets/uploads/DSC00240.jpg')">
 <div class="hero-overlay"></div>
 <div class="hero-content">
 <p class="hero-subtitle">BLOG</p>
@@ -326,7 +329,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <h2>¿Por qué fermenta diferente?</h2>
 
-<p>El centeno tiene menos gluten que el trigo, así que no puedes tratarlo igual. No desarrolla esas redes elásticas que hacen que una masa de trigo se estire como chicle. En su lugar, el centeno depende de los almidones y la <a href="blog-fermentacion-lenta-mejor-pan.html">fermentación ácida</a> para dar estructura al pan.</p>
+<p>El centeno tiene menos gluten que el trigo, así que no puedes tratarlo igual. No desarrolla esas redes elásticas que hacen que una masa de trigo se estire como chicle. En su lugar, el centeno depende de los almidones y la <a href="/blog-fermentacion-lenta-mejor-pan">fermentación ácida</a> para dar estructura al pan.</p>
 
 <p>Esto obligó a los panaderos nórdicos a dominar la fermentación natural mucho antes de que fuera tendencia. Sin la acidez de la masa madre, el pan de centeno se desmorona. Literalmente. Las bacterias lácticas modifican la estructura del almidón y crean la textura que define estos panes.</p>
 
@@ -338,13 +341,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>Lima tenía todo para que funcionara. Una escena gastronómica de clase mundial, consumidores curiosos y exigentes, y una tradición panadera propia — el pan francés limeño, la cachanga, el pan de anís — que demostraba que aquí el pan siempre fue importante.</p>
 
-<p>La fusión no fue forzada. El centeno nórdico se encontró con granos andinos. Las <a href="blog-tipos-harina-masa-madre.html">técnicas de fermentación</a> escandinavas se adaptaron al clima tropical. Las semillas de girasol y linaza se mezclaron con kiwicha y quinua. No era pan noruego ni pan peruano. Era algo nuevo.</p>
+<p>La fusión no fue forzada. El centeno nórdico se encontró con granos andinos. Las <a href="/blog-tipos-harina-masa-madre">técnicas de fermentación</a> escandinavas se adaptaron al clima tropical. Las semillas de girasol y linaza se mezclaron con kiwicha y quinua. No era pan noruego ni pan peruano. Era algo nuevo.</p>
 
 <h2>Más que una moda</h2>
 
 <p>Hay quienes ven el pan artesanal como una tendencia pasajera, otro capricho gastronómico que eventualmente dará paso a lo siguiente. Pero la tradición nórdica de masa madre lleva más de mil años. Los vikingos ya fermentaban su pan así. No es una moda — es el método original, redescubierto por una generación que se pregunta de dónde viene lo que come.</p>
 
-<p>En cada hogaza de <a href="blog-pan-artesanal-lima.html">pan artesanal que se hornea en Lima</a> con técnicas nórdicas hay algo de esa historia larga. El mismo tipo de levaduras salvajes. El mismo principio de paciencia. Solo que ahora el pan se come mirando el Pacífico en vez del fiordo, y eso, francamente, tampoco está nada mal.</p>
+<p>En cada hogaza de <a href="/blog-pan-artesanal-lima">pan artesanal que se hornea en Lima</a> con técnicas nórdicas hay algo de esa historia larga. El mismo tipo de levaduras salvajes. El mismo principio de paciencia. Solo que ahora el pan se come mirando el Pacífico en vez del fiordo, y eso, francamente, tampoco está nada mal.</p>
 
 </div>
 <div class="article-tags">
@@ -364,22 +367,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="related-inner">
 <h2 class="related-heading">Artículos relacionados</h2>
 <div class="related-grid">
-<a href="blog-historia-pan-masa-madre.html" class="rel-card">
-<img class="rel-card-img" src="https://victorsdou.pe/blog/wp-content/uploads/2022/09/DSC_9911-600x902.jpg" alt="La historia del pan de masa madre: un viaje de 5000 años" loading="lazy">
+<a href="/blog-historia-pan-masa-madre" class="rel-card">
+<img class="rel-card-img" src="assets/uploads/DSC_9911.jpg" alt="La historia del pan de masa madre: un viaje de 5000 años" loading="lazy">
 <div class="rel-card-body">
 <p class="rel-card-date">Febrero 2026</p>
 <h3 class="rel-card-title">La historia del pan de masa madre: un viaje de 5000 años</h3>
 </div>
 </a>
-<a href="blog-pan-artesanal-lima.html" class="rel-card">
-<img class="rel-card-img" src="https://victorsdou.pe/recetas/wp-content/uploads/2023/05/DSC00040-1160x653.jpg" alt="El auge del pan artesanal en Lima" loading="lazy">
+<a href="/blog-pan-artesanal-lima" class="rel-card">
+<img class="rel-card-img" src="assets/uploads/DSC00040.jpg" alt="El auge del pan artesanal en Lima" loading="lazy">
 <div class="rel-card-body">
 <p class="rel-card-date">Febrero 2026</p>
 <h3 class="rel-card-title">El auge del pan artesanal en Lima</h3>
 </div>
 </a>
-<a href="blog-fermentacion-lenta-mejor-pan.html" class="rel-card">
-<img class="rel-card-img" src="https://victorsdou.pe/blog/wp-content/uploads/2022/09/DSC00619-1-600x600.jpg" alt="Fermentación lenta: por qué la paciencia hace mejor pan" loading="lazy">
+<a href="/blog-fermentacion-lenta-mejor-pan" class="rel-card">
+<img class="rel-card-img" src="assets/uploads/DSC00619.jpg" alt="Fermentación lenta: por qué la paciencia hace mejor pan" loading="lazy">
 <div class="rel-card-body">
 <p class="rel-card-date">Enero 2026</p>
 <h3 class="rel-card-title">Fermentación lenta: por qué la paciencia hace mejor pan</h3>
@@ -415,7 +418,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div>
         <h3>Nosotros</h3>
-        <ul><li><a href="nosotros.html">Nuestra historia</a></li><li><a href="recetas.html" target="_blank">Recetas</a></li><li><a href="blog.html" target="_blank">Blog</a></li><li><a href="contacto.html">Contacto</a></li></ul>
+        <ul><li><a href="/nosotros">Nuestra historia</a></li><li><a href="/recetas" target="_blank">Recetas</a></li><li><a href="/blog" target="_blank">Blog</a></li><li><a href="/contacto">Contacto</a></li></ul>
       </div>
       <div>
         <h3>Social</h3>
@@ -424,7 +427,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="footer-bottom">
       <p>&copy; 2026 @victorsdou | Victor Dou SAC | RUC: 20606963123. Todos los derechos reservados.</p>
-      <div style="display:flex;gap:1.5rem"><a href="privacidad.html">Políticas de privacidad</a><a href="terminos.html">Términos y condiciones</a></div>
+      <div style="display:flex;gap:1.5rem"><a href="/privacidad">Políticas de privacidad</a><a href="/terminos">Términos y condiciones</a></div>
     </div>
   </div>
 </footer>
