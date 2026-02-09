@@ -247,6 +247,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PPCJ3TKL');</script>
 <!-- End Google Tag Manager -->
+<!-- GA4 gtag.js for custom event tracking -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZR5B4VLC2K"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZR5B4VLC2K',{send_page_view:false});</script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -457,13 +460,10 @@ function closeMenu(){menuOpen=false;dropdown.classList.remove('open');backdrop.c
 window.addEventListener('resize',()=>{if(window.innerWidth>=1024)closeMenu()});
 </script>
 
-<!-- GA4 Event Tracking via gtag -->
+<!-- GA4 Event Tracking -->
 <script>
-window.dataLayer = window.dataLayer || [];
-if (typeof gtag !== 'function') { function gtag(){dataLayer.push(arguments);} window.gtag = gtag; }
-
 function gtagEvent(name, params) {
-  gtag('event', name, params);
+  if (typeof gtag === 'function') gtag('event', name, params);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
