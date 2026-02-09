@@ -464,11 +464,10 @@ window.addEventListener('resize',()=>{if(window.innerWidth>=1024)closeMenu()});
 
 <!-- GA4 Event Tracking via gtag -->
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-
 function gtagEvent(name, params) {
-  gtag('event', name, params);
+  if (typeof gtag === 'function') {
+    gtag('event', name, params);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
