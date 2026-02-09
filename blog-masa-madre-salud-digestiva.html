@@ -247,9 +247,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PPCJ3TKL');</script>
 <!-- End Google Tag Manager -->
-<!-- GA4 gtag.js for custom event tracking -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZR5B4VLC2K"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZR5B4VLC2K',{send_page_view:false});</script>
+
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -455,8 +453,27 @@ window.addEventListener('resize',()=>{if(window.innerWidth>=1024)closeMenu()});
 
 <!-- GA4 Event Tracking -->
 <script>
+window.dataLayer = window.dataLayer || [];
 function gtagEvent(name, params) {
-  if (typeof gtag === 'function') gtag('event', name, params);
+  // Send via Measurement Protocol pixel as reliable fallback
+  var cid = '';
+  try { cid = document.cookie.match(/_ga=GA\d+\.\d+\.(.+)/)[1]; } catch(e) { cid = Math.random().toString(36).substring(2) + '.' + Date.now(); }
+  var url = 'https://www.google-analytics.com/g/collect'
+    + '?v=2&tid=G-ZR5B4VLC2K&cid=' + encodeURIComponent(cid)
+    + '&en=' + encodeURIComponent(name);
+  // Add event params
+  for (var k in params) {
+    if (params.hasOwnProperty(k)) {
+      url += '&ep.' + encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+    }
+  }
+  // Add page info
+  url += '&dl=' + encodeURIComponent(window.location.href);
+  url += '&dt=' + encodeURIComponent(document.title);
+  url += '&sid=' + Date.now();
+  // Send via pixel (most reliable, no CORS issues)
+  var img = new Image();
+  img.src = url;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
