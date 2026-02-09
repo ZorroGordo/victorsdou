@@ -132,7 +132,7 @@ a{text-decoration:none;color:inherit}
 .testimonials h2{text-align:center;font-size:clamp(1.5rem,3vw,2rem);text-transform:uppercase;letter-spacing:.15em;margin-bottom:3rem;font-family:'Playfair Display',Georgia,serif}
 .test-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:2rem}
 @media(min-width:768px){.test-grid{grid-template-columns:repeat(3,1fr)}}
-.test-card{background:#fff;border-radius:4px;padding:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.test-card{min-width:280px;max-width:320px;flex:0 0 auto;scroll-snap-align:start;background:#fff;border-radius:6px;padding:1.25rem 1.5rem;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:box-shadow .3s,transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.05)}.test-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-2px)}
 .test-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
 .test-info .name{font-weight:600;font-size:.85rem;color:#1A1A1A}
 .test-info .role{color:#888;font-size:.75rem;margin-top:.15rem}
@@ -171,13 +171,13 @@ a{text-decoration:none;color:inherit}
 .whatsapp svg{width:1.75rem;height:1.75rem;color:#fff}
 
 /* STATS */
-.stats{background:#F5F2ED;padding:3rem 1.5rem}
+.stats{background:#111;padding:4rem 1.5rem}
 .stats-inner{max-width:72rem;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;text-align:center}
 @media(min-width:640px){.stats-inner{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:768px){.stats-inner{grid-template-columns:repeat(5,1fr);gap:1.5rem}}
 .stat-item{display:flex;flex-direction:column;gap:.25rem}
-.stat-number{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;color:#1A1A1A}
-.stat-label{font-size:.75rem;color:#666;letter-spacing:.1em;text-transform:uppercase}
+.stat-number{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;color:#fff}
+.stat-label{font-size:.75rem;color:rgba(255,255,255,.6);letter-spacing:.1em;text-transform:uppercase}
 
 /* NOSOTROS CTA */
 .nosotros-cta{background:#3E582F;padding:5rem 1.5rem;text-align:center}
@@ -238,6 +238,7 @@ a{text-decoration:none;color:inherit}
   </div>
 
 <!-- STATS -->
+</section>
 <section class="stats">
   <div class="stats-inner">
     <div class="stat-item">
@@ -262,7 +263,7 @@ a{text-decoration:none;color:inherit}
     </div>
   </div>
 </section>
-</section>
+
 
 <!-- NUESTRA HISTORIA -->
 <section class="timeline-section" id="historia">
@@ -447,9 +448,7 @@ a{text-decoration:none;color:inherit}
         <p class="handle">@restaurantesperu &middot; 102K seguidores</p>
       </div>
     </div>
-    <div class="test-dots">
-      <span></span><span></span><span></span>
-    </div>
+    
   </div>
 </section>
 
@@ -459,7 +458,7 @@ a{text-decoration:none;color:inherit}
   <div class="nosotros-cta-inner">
     <h2 class="serif">¿Quieres ser parte de nuestros clientes?</h2>
     <p>Únete a los más de 25 negocios que confían en Victorsdou como su proveedor de pan artesanal.</p>
-    <a href="https://wa.me/51915092300?text=Hola%2C%20visit%C3%A9%20la%20p%C3%A1gina%20de%20Victorsdou%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20c%C3%B3mo%20trabajar%20juntos." target="_blank" rel="noopener noreferrer" class="btn">Conversemos</a>
+    <a href="https://wa.me/51915092300?text=Hola%2C%20visit%C3%A9%20la%20p%C3%A1gina%20de%20Victorsdou%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20c%C3%B3mo%20trabajar%20juntos." target="_blank" rel="noopener noreferrer" class="btn-cta">Solicita información</a><a href="contacto.html" class="btn-secondary">Contáctanos</a>
   </div>
 </section>
 
@@ -484,7 +483,7 @@ a{text-decoration:none;color:inherit}
       </div>
       <div>
         <h3>Ayuda</h3>
-        <ul><li><a href="#">Arma tu pack</a></li><li><a href="#">Envío semanal</a></li><li><a href="#">B2B</a></li><li><a href="contacto.html">Contacto</a></li></ul>
+        <ul><li><a href="contacto.html">Arma tu pack</a></li><li><a href="contacto.html">Envío semanal</a></li><li><a href="contacto.html">B2B</a></li><li><a href="contacto.html">Contacto</a></li></ul>
       </div>
       <div>
         <h3>Nosotros</h3>
