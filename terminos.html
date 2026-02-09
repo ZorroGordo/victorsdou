@@ -293,31 +293,35 @@ function closeMenu(){
 }
 </script>
 
-<!-- GTM Event Tracking -->
+<!-- GA4 Event Tracking via gtag -->
 <script>
-window.dataLayer = window.dataLayer || [];
+function gtagEvent(name, params) {
+  // gtag is made available by the Google Tag loaded through GTM
+  if (typeof gtag === 'function') {
+    gtag('event', name, params);
+  } else {
+    // Fallback: push to dataLayer for GTM to pick up
+    window.dataLayer = window.dataLayer || [];
+    params.event = name;
+    dataLayer.push(params);
+  }
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   // --- CTA BUTTON CLICKS ---
-  // Track all anchor-based CTAs
   document.querySelectorAll('a.btn, a.btn-hero, a.btn-hero-secondary, a.btn-light, a.cta-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var label = this.textContent.trim();
       var dest = this.href || '';
       var isWhatsApp = dest.indexOf('wa.me') > -1;
       var section = '';
-      // Try to find parent section for context
       var parent = this.closest('section, .hero, .article-cta-box, div[id]');
-      if (parent) {
-        section = parent.id || parent.className.split(' ')[0] || '';
-      }
-      dataLayer.push({
-        'event': 'cta_click',
-        'cta_text': label,
-        'cta_type': isWhatsApp ? 'whatsapp' : 'internal',
-        'cta_destination': isWhatsApp ? 'WhatsApp' : dest,
-        'cta_section': section,
-        'page_path': window.location.pathname
+      if (parent) section = parent.id || parent.className.split(' ')[0] || '';
+      gtagEvent('cta_click', {
+        cta_text: label,
+        cta_type: isWhatsApp ? 'whatsapp' : 'internal',
+        cta_destination: isWhatsApp ? 'WhatsApp' : dest,
+        cta_section: section
       });
     });
   });
@@ -326,13 +330,11 @@ document.addEventListener('DOMContentLoaded', function() {
   var stickyB2B = document.querySelector('#stickyB2B a, .sticky-b2b a');
   if (stickyB2B) {
     stickyB2B.addEventListener('click', function() {
-      dataLayer.push({
-        'event': 'cta_click',
-        'cta_text': 'Solicita Muestras B2B (sticky)',
-        'cta_type': 'whatsapp',
-        'cta_destination': 'WhatsApp',
-        'cta_section': 'sticky_mobile',
-        'page_path': window.location.pathname
+      gtagEvent('cta_click', {
+        cta_text: 'Solicita Muestras B2B (sticky)',
+        cta_type: 'whatsapp',
+        cta_destination: 'WhatsApp',
+        cta_section: 'sticky_mobile'
       });
     });
   }
@@ -341,63 +343,46 @@ document.addEventListener('DOMContentLoaded', function() {
   var waBtn = document.querySelector('a.whatsapp');
   if (waBtn) {
     waBtn.addEventListener('click', function() {
-      dataLayer.push({
-        'event': 'whatsapp_click',
-        'cta_text': 'WhatsApp flotante',
-        'cta_type': 'whatsapp',
-        'cta_destination': 'WhatsApp',
-        'cta_section': 'floating_button',
-        'page_path': window.location.pathname
+      gtagEvent('whatsapp_click', {
+        cta_text: 'WhatsApp flotante',
+        cta_type: 'whatsapp',
+        cta_section: 'floating_button'
       });
     });
   }
 
-  // --- CONTACT FORM TRACKING ---
+  // --- CONTACT FORM SUBMISSION ---
   var contactForm = document.querySelector('form.contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function() {
-      var formData = {};
-      try {
-        formData = {
-          'has_nombre': !!contactForm.querySelector('[name="nombre"]').value,
-          'has_correo': !!contactForm.querySelector('[name="correo"]').value,
-          'has_empresa': !!contactForm.querySelector('[name="empresa"]').value,
-          'tipo_negocio': (contactForm.querySelector('[name="tipo"]') || {}).value || '',
-          'volumen': (contactForm.querySelector('[name="volumen"]') || {}).value || '',
-          'has_producto': !!contactForm.querySelector('[name="producto"]').value,
-          'has_mensaje': !!contactForm.querySelector('[name="mensaje"]').value
-        };
-      } catch(e) {}
-      dataLayer.push({
-        'event': 'form_submit',
-        'form_name': 'contacto_b2b',
-        'form_fields': formData,
-        'page_path': window.location.pathname
+      var tipo = '', volumen = '';
+      try { tipo = contactForm.querySelector('[name="tipo"]').value; } catch(e) {}
+      try { volumen = contactForm.querySelector('[name="volumen"]').value; } catch(e) {}
+      gtagEvent('form_submit', {
+        form_name: 'contacto_b2b',
+        tipo_negocio: tipo,
+        volumen_mensual: volumen
       });
     });
   }
 
   // --- FORM COMPLETION (successful redirect back) ---
   if (window.location.search.indexOf('enviado=true') > -1) {
-    dataLayer.push({
-      'event': 'form_complete',
-      'form_name': 'contacto_b2b',
-      'conversion': true,
-      'page_path': window.location.pathname
+    gtagEvent('generate_lead', {
+      form_name: 'contacto_b2b',
+      value: 1,
+      currency: 'PEN'
     });
   }
 
   // --- NAV CONTACT LINK CLICKS ---
   document.querySelectorAll('a[href="/contacto"], a[href="contacto"]').forEach(function(link) {
     link.addEventListener('click', function() {
-      var location = 'unknown';
-      if (this.closest('nav')) location = 'navbar';
-      else if (this.closest('footer')) location = 'footer';
-      else if (this.closest('.mobile-menu')) location = 'mobile_menu';
-      dataLayer.push({
-        'event': 'nav_to_contact',
-        'link_location': location,
-        'page_path': window.location.pathname
+      var loc = 'unknown';
+      if (this.closest('nav')) loc = 'navbar';
+      else if (this.closest('footer')) loc = 'footer';
+      gtagEvent('nav_to_contact', {
+        link_location: loc
       });
     });
   });
