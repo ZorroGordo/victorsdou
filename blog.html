@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Términos y Condiciones — Victorsdou — Panadería Nórdica de Masa Madre</title>
+<title>Blog — Victorsdou</title>
 <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
@@ -24,7 +24,6 @@ a{text-decoration:none;color:inherit}
 .nav.scrolled,.nav.menu-open{background:rgba(255,255,255,.95);backdrop-filter:blur(8px);box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .nav-inner{max-width:80rem;margin:0 auto;padding:0 1.5rem}
 @media(min-width:1024px){.nav-inner{padding:0 3rem}}
-
 .nav-desktop{display:none;grid-template-columns:1fr auto 1fr;align-items:center;height:7rem}
 @media(min-width:1024px){.nav-desktop{display:grid}}
 .nav-left,.nav-right{display:flex;gap:2.5rem}
@@ -35,7 +34,6 @@ a{text-decoration:none;color:inherit}
 .nav-link:hover{opacity:.6}
 .nav-logo{width:280px;height:auto;transition:all .3s}
 .nav.scrolled .nav-logo{filter:brightness(0)}
-
 .nav-mobile{display:flex;align-items:center;height:5rem}
 @media(min-width:1024px){.nav-mobile{display:none}}
 .nav-spacer{width:2.5rem}
@@ -45,59 +43,161 @@ a{text-decoration:none;color:inherit}
 .hamburger{width:2.5rem;height:2.5rem;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:#fff;transition:color .3s}
 .nav.scrolled .hamburger,.nav.menu-open .hamburger{color:#1A1A1A}
 .hamburger svg{width:1.5rem;height:1.5rem}
-
 .mobile-dropdown{overflow:hidden;max-height:0;transition:max-height .3s ease-in-out}
 .mobile-dropdown.open{max-height:18rem}
 .mobile-dropdown-inner{background:#fff;border-top:1px solid #f3f3f3;padding:1.5rem 2rem;display:flex;flex-direction:column;gap:1.25rem}
 .mobile-dropdown-inner a{color:#1A1A1A;font-size:.875rem;letter-spacing:.2em;font-weight:500}
 @media(min-width:1024px){.mobile-dropdown{display:none}}
-
 .backdrop{display:none;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.3)}
 .backdrop.show{display:block}
 @media(min-width:1024px){.backdrop{display:none!important}}
 
 /* HERO */
-.hero{position:relative;height:30vh;min-height:300px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#1A1A1A}
-.hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.hero-nosotros{position:relative;height:50vh;min-height:400px;display:flex;align-items:center;justify-content:center;overflow:hidden;background-size:cover;background-position:center}
+.hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4)}
 .hero-content{position:relative;z-index:10;text-align:center;padding:0 1.5rem;max-width:56rem;margin:0 auto}
-.hero h1{font-size:clamp(1.5rem,4vw,2.5rem);color:#fff;text-transform:uppercase;letter-spacing:.15em;line-height:1.1;font-family:'Playfair Display',Georgia,serif}
+.hero-subtitle{font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:#fff;margin-bottom:1rem;font-weight:500}
+.hero-heading{font-size:clamp(1.75rem,4vw,3.5rem);color:#fff;text-transform:uppercase;letter-spacing:.05em;line-height:1.2;font-family:'Playfair Display',Georgia,serif}
 
-/* LEGAL CONTENT */
-.legal{background:#fff;padding:4rem 1.5rem}
-@media(min-width:768px){.legal{padding:5rem 1.5rem}}
-.legal-inner{max-width:52rem;margin:0 auto}
-.legal-inner h2{font-size:1.25rem;font-weight:600;margin:2.5rem 0 1rem;text-transform:uppercase;letter-spacing:.05em;font-family:'Playfair Display',Georgia,serif}
-.legal-inner h3{font-size:1rem;font-weight:600;margin:2rem 0 .75rem}
-.legal-inner p{color:#4A4A4A;line-height:1.8;margin-bottom:1rem;font-size:.9rem}
-.legal-inner ul{color:#4A4A4A;line-height:1.8;margin-bottom:1rem;font-size:.9rem;padding-left:1.5rem}
-.legal-inner ul li{margin-bottom:.5rem}
-.legal-inner .updated{color:#7A7A7A;font-size:.8rem;margin-bottom:2rem;font-style:italic}
+/* TIMELINE */
+.timeline-section{padding:5rem 1.5rem}
+@media(min-width:768px){.timeline-section{padding:6rem 3rem}}
+.timeline-inner{max-width:60rem;margin:0 auto}
+.timeline-heading{text-align:center;font-size:clamp(1.75rem,3vw,2.5rem);text-transform:uppercase;letter-spacing:.15em;margin-bottom:4rem;font-family:'Playfair Display',Georgia,serif}
+.timeline-items{display:flex;flex-direction:column;gap:0}
+.tl-row{display:grid;grid-template-columns:1fr;gap:1.5rem;padding:2.5rem 0;border-bottom:1px solid transparent}
+@media(min-width:768px){.tl-row{grid-template-columns:180px 1px 1fr;gap:0;align-items:start}}
+.tl-year{font-size:clamp(2rem,4vw,3rem);font-weight:600;font-family:'Playfair Display',Georgia,serif;color:#1A1A1A}
+@media(min-width:768px){.tl-year{text-align:right;padding-right:2.5rem}}
+.tl-line{display:none;position:relative;background:#ddd;width:1px;min-height:100%;justify-self:center}
+@media(min-width:768px){.tl-line{display:block}}
+.tl-dot{position:absolute;top:0.5rem;left:50%;transform:translateX(-50%);width:12px;height:12px;background:#1A1A1A;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 1px #ccc}
+.tl-content{padding-left:0}
+@media(min-width:768px){.tl-content{padding-left:2.5rem}}
+.tl-img{width:100%;max-width:240px;height:auto;border-radius:4px;margin-bottom:1rem}
+.tl-title{font-weight:600;font-size:1rem;margin-bottom:.5rem;color:#1A1A1A}
+.tl-text{color:#555;line-height:1.7;font-size:.9rem}
+/* Connect the timeline lines */
+.tl-row:not(:last-child) .tl-line::after{content:'';position:absolute;top:0;bottom:-100%;left:0;width:1px;background:#ddd}
+
+/* WHY US */
+.why-us{padding:5rem 1.5rem;background:#F9F9F9}
+@media(min-width:768px){.why-us{padding:6rem 1.5rem}}
+.why-us-inner{max-width:72rem;margin:0 auto;display:grid;grid-template-columns:1fr;gap:3rem;align-items:start}
+@media(min-width:1024px){.why-us-inner{grid-template-columns:1fr 1.2fr;gap:5rem}}
+.why-us-text h2{font-size:clamp(1.5rem,3vw,2rem);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2rem;font-family:'Playfair Display',Georgia,serif;line-height:1.2}
+.why-us-text p{color:#555;line-height:1.7;margin-bottom:1.25rem;font-size:.9rem}
+.why-us-img-wrap{position:relative;padding-bottom:3rem}
+@media(min-width:640px){.why-us-img-wrap{padding-bottom:4rem}}
+.why-us-img{width:100%;height:auto;border-radius:4px}
+.quote-card{background:#fff;padding:2rem;border-radius:4px;box-shadow:0 4px 16px rgba(0,0,0,.08);max-width:380px;margin-top:-3rem;margin-left:auto}
+@media(min-width:640px){.quote-card{position:absolute;bottom:0;right:0;margin-top:0}}
+@media(min-width:1024px){.quote-card{bottom:-20px;right:-20px}}
+.quote-card blockquote{font-size:.85rem;line-height:1.7;font-style:italic;color:#555;margin-bottom:1rem}
+.quote-card .quote-name{font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#1A1A1A;text-align:right}
+
+/* PROCESO - CIRCULAR LAYOUT */
+.proceso{padding:5rem 1.5rem;background:#fff}
+@media(min-width:768px){.proceso{padding:6rem 1.5rem}}
+.proceso-inner{max-width:72rem;margin:0 auto}
+.proceso-wrap{position:relative;width:100%;max-width:900px;margin:0 auto}
+/* Mobile: simple list */
+.proceso-mobile{display:flex;flex-direction:column;gap:2.5rem}
+@media(min-width:900px){.proceso-mobile{display:none}}
+.proceso-mobile .p-step{text-align:center;max-width:400px;margin:0 auto}
+.proceso-mobile .p-step svg{width:3rem;height:3rem;margin:0 auto 1rem;color:#1A1A1A}
+.proceso-mobile .p-step h3{font-size:.85rem;font-weight:600;letter-spacing:.05em;margin-bottom:.5rem;color:#1A1A1A;border-bottom:1.5px solid #1A1A1A;padding-bottom:.5rem;display:inline-block}
+.proceso-mobile .p-step p{font-size:.8rem;line-height:1.6;color:#555}
+/* Desktop: circular */
+.proceso-circle{display:none;position:relative;width:100%;aspect-ratio:1/0.85;min-height:600px}
+@media(min-width:900px){.proceso-circle{display:block}}
+.proceso-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:2}
+.proceso-center h2{font-size:clamp(1.5rem,2.5vw,2rem);text-transform:uppercase;letter-spacing:.15em;font-family:'Playfair Display',Georgia,serif;line-height:1.3}
+.p-item{position:absolute;width:220px;text-align:center}
+.p-item svg{width:2.5rem;height:2.5rem;margin:0 auto .75rem;color:#1A1A1A}
+.p-item h3{font-size:.75rem;font-weight:600;letter-spacing:.05em;margin-bottom:.5rem;color:#1A1A1A;border-bottom:1.5px solid #1A1A1A;padding-bottom:.5rem;display:inline-block}
+.p-item p{font-size:.75rem;line-height:1.5;color:#555}
+/* Positions for 6 items around center */
+.p-item.pos-1{top:0;left:50%;transform:translateX(-50%)}
+.p-item.pos-2{top:15%;right:0}
+.p-item.pos-3{bottom:15%;right:0}
+.p-item.pos-4{bottom:0;left:50%;transform:translateX(-50%)}
+.p-item.pos-5{bottom:15%;left:0}
+.p-item.pos-6{top:15%;left:0}
+
+/* TESTIMONIALS */
+.testimonials{padding:5rem 1.5rem;background:#F9F9F9}
+@media(min-width:768px){.testimonials{padding:6rem 1.5rem}}
+.testimonials-inner{max-width:72rem;margin:0 auto}
+.testimonials h2{text-align:center;font-size:clamp(1.5rem,3vw,2rem);text-transform:uppercase;letter-spacing:.15em;margin-bottom:3rem;font-family:'Playfair Display',Georgia,serif}
+.test-grid{display:flex;overflow-x:auto;gap:1.25rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 1.5rem .75rem;scrollbar-width:thin;scrollbar-color:#ccc transparent}.test-grid::-webkit-scrollbar{height:4px}.test-grid::-webkit-scrollbar-track{background:transparent}.test-grid::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px}
+.test-card{min-width:280px;max-width:320px;flex:0 0 auto;scroll-snap-align:start;background:#fff;border-radius:6px;padding:1.25rem 1.5rem;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:box-shadow .3s,transform .3s;box-shadow:0 1px 3px rgba(0,0,0,.05)}.test-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-2px)}
+.test-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.test-info .name{font-weight:600;font-size:.85rem;color:#1A1A1A}
+.test-info .role{color:#888;font-size:.75rem;margin-top:.15rem}
+.test-avatar{width:3rem;height:3rem;border-radius:50%;background:#E8E8E8;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;color:#888;flex-shrink:0;overflow:hidden}
+.test-avatar img{width:100%;height:100%;object-fit:cover}
+.test-card blockquote{color:#555;font-size:.8rem;line-height:1.6;font-style:italic;margin-bottom:.75rem}
+.test-card .handle{color:#888;font-size:.7rem}
+.test-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1.5rem}
+.test-dots span{width:8px;height:8px;border-radius:50%;background:#ddd}
+.test-dots span:first-child{background:#1A1A1A}
 
 /* FOOTER */
-.footer{background:#0A0A0A;color:#fff;padding:4rem 1.5rem 2rem}
-@media(min-width:768px){.footer{padding:5rem 1.5rem 3rem}}
-.footer-inner{max-width:80rem;margin:0 auto}
-.footer-grid{display:grid;grid-template-columns:1fr;gap:3rem;margin-bottom:3rem}
-@media(min-width:640px){.footer-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1024px){.footer-grid{grid-template-columns:2fr 1fr 1fr}}
-.footer-logo{width:160px;height:auto}
-.footer h3{font-size:.875rem;letter-spacing:.2em;font-weight:600;text-transform:uppercase;margin-bottom:1.5rem}
-.footer ul{list-style:none}
-.footer ul li{margin-bottom:.75rem}
-.footer ul li a{color:#A0A0A0;font-size:.8125rem;transition:color .3s}
-.footer ul li a:hover{color:#fff}
-.footer-stars{display:flex;align-items:center;gap:.5rem;margin-top:1rem}
-.footer-stars svg{width:1rem;height:1rem;color:#FACC15;flex-shrink:0}
-.footer-stars span{font-size:.85rem;color:#A0A0A0}
-.footer-bottom{border-top:1px solid #333;padding-top:2rem;display:flex;flex-direction:column;gap:1rem;font-size:.75rem;color:#A0A0A0}
-@media(min-width:768px){.footer-bottom{flex-direction:row;justify-content:space-between;align-items:center}}
+.footer{background:#111;color:#F5F0E8}
+.footer-inner{max-width:80rem;margin:0 auto;padding:4rem 1.5rem}
+@media(min-width:768px){.footer-inner{padding:5rem 1.5rem}}
+@media(min-width:1024px){.footer-inner{padding:5rem 3rem}}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:3rem}
+@media(min-width:768px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.footer-grid{grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem}}
+.footer h3{font-size:.875rem;letter-spacing:.25em;text-transform:uppercase;color:#fff;margin-bottom:1.5rem;font-weight:500}
+.footer ul{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.footer ul a{font-size:.875rem;color:#A0A0A0;transition:color .3s}
+.footer ul a:hover{color:#fff}
+.footer-logo{height:3rem;width:auto;margin-bottom:1rem}
+.footer-stars{margin-top:1rem;display:flex;align-items:center;gap:.5rem}
+.footer-stars svg{width:1rem;height:1rem;color:#FACC15}
+.footer-stars span{font-size:.875rem;color:#A0A0A0}
+.footer-bottom{margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;gap:1rem;font-size:.75rem;color:#A0A0A0}
+@media(min-width:640px){.footer-bottom{flex-direction:row;justify-content:space-between}}
 .footer-bottom a{color:#A0A0A0;transition:color .3s}
 .footer-bottom a:hover{color:#fff}
 
 /* WHATSAPP */
-.whatsapp{position:fixed;bottom:2rem;right:1.5rem;width:3.5rem;height:3.5rem;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:all .3s;z-index:40;text-decoration:none}
-.whatsapp svg{width:1.5rem;height:1.5rem}
-.whatsapp:hover{transform:scale(1.1);box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.whatsapp{position:fixed;bottom:1.5rem;right:1.5rem;z-index:50;width:3.5rem;height:3.5rem;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:all .3s}
+.whatsapp:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.whatsapp svg{width:1.75rem;height:1.75rem;color:#fff}
+
+/* STATS */
+.stats{background:#111;padding:4rem 1.5rem}
+.stats-inner{max-width:72rem;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;text-align:center}
+@media(min-width:640px){.stats-inner{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:768px){.stats-inner{grid-template-columns:repeat(5,1fr);gap:1.5rem}}
+.stat-item{display:flex;flex-direction:column;gap:.25rem}
+.stat-number{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;color:#fff}
+.stat-label{font-size:.75rem;color:rgba(255,255,255,.6);letter-spacing:.1em;text-transform:uppercase}
+
+/* NOSOTROS CTA */
+
+.nosotros-cta{background:#111;padding:6rem 1.5rem;text-align:center}.nosotros-cta-inner{max-width:48rem;margin:0 auto}.nosotros-cta h2{color:#fff;font-size:clamp(1.75rem,3.5vw,2.5rem);margin-bottom:1.5rem;font-family:'Playfair Display',Georgia,serif;letter-spacing:.05em}.nosotros-cta p{color:rgba(255,255,255,.7);font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem}.nosotros-cta .btn-cta{display:inline-block;background:#fff;color:#111;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;padding:1.25rem 3.5rem;font-weight:600;transition:all .3s;border:none;text-decoration:none}.nosotros-cta .btn-cta:hover{background:#3E582F;color:#fff}.nosotros-cta .btn-secondary{display:inline-block;background:transparent;color:#fff;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;padding:1rem 2.5rem;border:1px solid rgba(255,255,255,.4);margin-left:1rem;transition:all .3s;text-decoration:none}.nosotros-cta .btn-secondary:hover{background:rgba(255,255,255,.1);border-color:#fff}@media(max-width:640px){.nosotros-cta .btn-cta{display:block;width:100%;margin-bottom:1rem}.nosotros-cta .btn-secondary{display:block;width:100%;margin-left:0}}
+/* CARDS GRID */
+.cards-section{padding:5rem 1.5rem;background:#fff}
+@media(min-width:768px){.cards-section{padding:6rem 1.5rem}}
+.cards-inner{max-width:72rem;margin:0 auto}
+.cards-intro{text-align:center;max-width:36rem;margin:0 auto 3rem;color:#666;font-size:.95rem;line-height:1.7}
+.cards-grid{display:grid;grid-template-columns:1fr;gap:2rem}
+@media(min-width:640px){.cards-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.cards-grid{grid-template-columns:repeat(3,1fr)}}
+.card{display:block;background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:all .3s;text-decoration:none;color:inherit}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.1)}
+.card-img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.card-body{padding:1.5rem}
+.card-date{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#999;margin-bottom:.5rem}
+.card-title{font-size:1rem;font-weight:600;line-height:1.4;margin-bottom:.75rem;color:#1A1A1A;font-family:'Playfair Display',Georgia,serif}
+.card-excerpt{color:#666;font-size:.85rem;line-height:1.6;margin-bottom:1.25rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card-link{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:#1A1A1A;transition:color .3s}
+.card-link:hover{color:#3E582F}
 </style>
 </head>
 <body>
@@ -147,69 +247,59 @@ a{text-decoration:none;color:inherit}
 
 <main>
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <h1>TÉRMINOS Y CONDICIONES</h1>
-  </div>
+
+<section class="hero-nosotros" style="background-image:url('https://victorsdou.pe/blog/wp-content/uploads/2022/09/DSC_9911-600x902.jpg')">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<p class="hero-subtitle">BLOG</p>
+<h1 class="hero-heading">Historias y consejos</h1>
+</div>
 </section>
 
-<!-- LEGAL CONTENT -->
-<section class="legal">
-  <div class="legal-inner">
-    <p class="updated">Última actualización: febrero 2026</p>
-
-    <p>Los presentes Términos y Condiciones regulan el uso del sitio web <strong>victorsdou.pe</strong> y la adquisición de productos ofrecidos por <strong>Victor Dou SAC</strong>, identificada con RUC N.° 20606963123, con domicilio en Lima, Perú, operadora de la marca comercial <strong>@victorsdou</strong> (en adelante, "la Empresa"). Al acceder a nuestro sitio web o realizar una compra, usted acepta estos términos en su totalidad.</p>
-
-    <h2>1. Información general</h2>
-    <p>Victor Dou SAC es una empresa dedicada a la elaboración y comercialización de productos de panadería nórdica de masa madre, operando bajo la marca @victorsdou. Nuestros servicios incluyen venta directa mediante delivery, suscripciones mensuales y venta B2B a supermercados, cafés, restaurantes y hoteles.</p>
-
-    <h2>2. Productos y precios</h2>
-    <p>Los productos ofrecidos en nuestro sitio web están sujetos a disponibilidad. Nos reservamos el derecho de modificar precios, descripciones y disponibilidad sin previo aviso. Los precios incluyen el Impuesto General a las Ventas (IGV) según la legislación tributaria peruana, salvo que se indique lo contrario. En caso de error en el precio publicado, nos reservamos el derecho de cancelar el pedido notificando al cliente.</p>
-
-    <h2>3. Proceso de compra</h2>
-    <p>Para realizar una compra, el cliente deberá comunicarse a través de nuestro canal de WhatsApp o los medios habilitados en el sitio web. El pedido se considerará confirmado una vez que la Empresa haya verificado la disponibilidad del producto y el cliente haya realizado el pago correspondiente. La Empresa emitirá el comprobante de pago respectivo (boleta o factura) conforme a la normativa de SUNAT.</p>
-
-    <h2>4. Medios de pago</h2>
-    <p>Aceptamos los siguientes medios de pago: transferencia bancaria, Yape, Plin, y otros medios electrónicos que la Empresa ponga a disposición. El pago deberá realizarse de manera previa a la entrega del producto, salvo acuerdo especial para clientes B2B.</p>
-
-    <h2>5. Entregas y delivery</h2>
-    <p>Las entregas se realizan en Lima Metropolitana según la cobertura y horarios establecidos por la Empresa. Los plazos de entrega son estimados y pueden variar según la demanda y condiciones externas. La Empresa no será responsable por retrasos causados por fuerza mayor, caso fortuito, restricciones de tránsito u otras circunstancias fuera de su control, conforme al artículo 1315 del Código Civil peruano.</p>
-
-    <h2>6. Suscripciones</h2>
-    <p>Las suscripciones mensuales permiten al cliente recibir productos de manera periódica. Las condiciones específicas de cada plan de suscripción (frecuencia, productos, precio) serán comunicadas al momento de la contratación. El cliente podrá cancelar su suscripción con un aviso previo de al menos 7 días calendario antes de la siguiente fecha de entrega.</p>
-
-    <h2>7. Política de devoluciones y reclamos</h2>
-    <p>Debido a la naturaleza perecedera de nuestros productos de panadería, no aceptamos devoluciones una vez entregado el producto, salvo que este presente defectos de calidad evidentes. En caso de reclamo por calidad, el cliente deberá comunicarse dentro de las 24 horas siguientes a la recepción del producto, adjuntando fotografías del producto y su empaque. Los reclamos serán evaluados y resueltos en un plazo máximo de 15 días hábiles, conforme al Código de Protección y Defensa del Consumidor (Ley N.° 29571).</p>
-
-    <h2>8. Libro de Reclamaciones</h2>
-    <p>De acuerdo con lo establecido en el Código de Protección y Defensa del Consumidor y el Decreto Supremo N.° 011-2011-PCM, la Empresa cuenta con un Libro de Reclamaciones virtual disponible para los consumidores. Puede acceder al mismo a través de nuestro sitio web o solicitándolo al correo <a href="mailto:hola@victorsdou.pe" style="color:#1A1A1A;text-decoration:underline">hola@victorsdou.pe</a>.</p>
-
-    <h2>9. Propiedad intelectual</h2>
-    <p>Todo el contenido del sitio web, incluyendo textos, imágenes, logotipos, diseños, marcas y demás material, es propiedad de Victor Dou SAC o se utiliza bajo licencia, y está protegido por la legislación peruana e internacional sobre propiedad intelectual y derechos de autor (Decreto Legislativo N.° 822 y Decisión 486 de la Comunidad Andina). Queda prohibida la reproducción, distribución o modificación total o parcial del contenido sin autorización expresa y por escrito de la Empresa.</p>
-
-    <h2>10. Clientes B2B</h2>
-    <p>Las relaciones comerciales con clientes empresariales (supermercados, cafés, restaurantes, hoteles y otros) se regirán por los acuerdos comerciales específicos pactados entre las partes. Los presentes Términos y Condiciones aplicarán de manera supletoria en todo lo no regulado por dichos acuerdos.</p>
-
-    <h2>11. Limitación de responsabilidad</h2>
-    <p>La Empresa no será responsable por: (i) daños indirectos, incidentales o consecuentes derivados del uso del sitio web; (ii) interrupciones temporales del servicio por mantenimiento o causas técnicas; (iii) el contenido de sitios web de terceros enlazados desde nuestro sitio; (iv) el uso indebido que el cliente haga de los productos adquiridos. La responsabilidad total de la Empresa en ningún caso excederá el valor del producto adquirido.</p>
-
-    <h2>12. Protección de datos personales</h2>
-    <p>El tratamiento de datos personales se rige por nuestra <a href="privacidad.html" style="color:#1A1A1A;text-decoration:underline">Política de Privacidad</a>, la cual forma parte integrante de estos Términos y Condiciones, y se ajusta a lo dispuesto en la Ley N.° 29733, Ley de Protección de Datos Personales.</p>
-
-    <h2>13. Modificaciones</h2>
-    <p>La Empresa se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Las modificaciones entrarán en vigor desde su publicación en el sitio web. El uso continuado del sitio web o la realización de compras posteriores a la publicación de los cambios constituirá la aceptación de los nuevos términos.</p>
-
-    <h2>14. Legislación aplicable y jurisdicción</h2>
-    <p>Los presentes Términos y Condiciones se rigen por las leyes de la República del Perú. Para la resolución de cualquier controversia derivada de estos términos, las partes se someten a la jurisdicción de los jueces y tribunales del Distrito Judicial de Lima, renunciando a cualquier otro fuero que pudiera corresponderles. Alternativamente, las partes podrán someter sus controversias a arbitraje de derecho conforme a las reglas del Centro de Arbitraje de la Cámara de Comercio de Lima.</p>
-
-    <h2>15. Contacto</h2>
-    <p>Para cualquier consulta sobre estos Términos y Condiciones:</p>
-    <p><strong>Victor Dou SAC</strong><br>RUC: 20606963123<br>Correo electrónico: <a href="mailto:hola@victorsdou.pe" style="color:#1A1A1A;text-decoration:underline">hola@victorsdou.pe</a><br>WhatsApp: <a href="https://wa.me/51915092300" style="color:#1A1A1A;text-decoration:underline">+51 915 092 300</a></p>
-  </div>
+<section class="cards-section">
+<div class="cards-inner">
+<p class="cards-intro">Artículos sobre masa madre, nutrición y estilo de vida saludable.</p>
+<div class="cards-grid">
+<a href="https://victorsdou.pe/blog/razones-para-consumir-pan-de-masa-madre/" class="card" target="_blank" rel="noopener">
+<img class="card-img" src="https://victorsdou.pe/blog/wp-content/uploads/2022/09/DSC_9911-600x902.jpg" alt="Razones para consumir pan de masa madre" loading="lazy">
+<div class="card-body">
+<p class="card-date">Noviembre 2022</p>
+<h3 class="card-title">Razones para consumir pan de masa madre</h3>
+<p class="card-excerpt">El pan de masa madre, elaborado con fermentación natural, ofrece múltiples beneficios para la salud: mejor digestión, mayor absorción de nutrientes y un sabor incomparable.</p>
+<span class="card-link">Leer más →</span>
+</div>
+</a>
+<a href="https://victorsdou.pe/blog/como-tener-un-estilo-de-vida-saludable-y-tips-para-lograrlo/" class="card" target="_blank" rel="noopener">
+<img class="card-img" src="https://victorsdou.pe/blog/wp-content/uploads/2022/09/DSC00619-1-600x600.jpg" alt="Cómo tener un estilo de vida saludable" loading="lazy">
+<div class="card-body">
+<p class="card-date">Septiembre 2022</p>
+<h3 class="card-title">Cómo tener un estilo de vida saludable</h3>
+<p class="card-excerpt">Descubre consejos prácticos para llevar un estilo de vida más saludable, incluyendo una alimentación balanceada con pan artesanal de masa madre.</p>
+<span class="card-link">Leer más →</span>
+</div>
+</a>
+<a href="https://victorsdou.pe/blog/las-semillas-y-sus-propiedades/" class="card" target="_blank" rel="noopener">
+<img class="card-img" src="https://victorsdou.pe/blog/wp-content/uploads/2022/08/DSC00483-1-edited-600x450.jpg" alt="Las semillas y sus propiedades" loading="lazy">
+<div class="card-body">
+<p class="card-date">Agosto 2022</p>
+<h3 class="card-title">Las semillas y sus propiedades</h3>
+<p class="card-excerpt">Conoce las propiedades nutricionales de las semillas que incorporamos en nuestros panes de masa madre.</p>
+<span class="card-link">Leer más →</span>
+</div>
+</a>
+<a href="https://victorsdou.pe/blog/cuales-son-las-diferencias-entre-la-masa-madre-y-el-pan-convencional/" class="card" target="_blank" rel="noopener">
+<img class="card-img" src="https://victorsdou.pe/blog/wp-content/uploads/2022/08/DSC_7229-1-600x600.jpg" alt="¿Cuáles son las diferencias entre la masa madre y el pan convencional?" loading="lazy">
+<div class="card-body">
+<p class="card-date">Agosto 2022</p>
+<h3 class="card-title">¿Cuáles son las diferencias entre la masa madre y el pan convencional?</h3>
+<p class="card-excerpt">Descubre las diferencias fundamentales entre el pan de masa madre artesanal y el pan convencional industrial.</p>
+<span class="card-link">Leer más →</span>
+</div>
+</a>
+</div>
+</div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer" id="contacto">
   <div class="footer-inner">
     <div class="footer-grid">
@@ -252,30 +342,12 @@ a{text-decoration:none;color:inherit}
 </a>
 
 <script>
-const navbar=document.getElementById('navbar');
-const hamburgerBtn=document.getElementById('hamburgerBtn');
-const mobileDropdown=document.getElementById('mobileDropdown');
-const backdrop=document.getElementById('backdrop');
+const nav=document.getElementById('navbar'),hamburger=document.getElementById('hamburgerBtn'),dropdown=document.getElementById('mobileDropdown'),backdrop=document.getElementById('backdrop');
 let menuOpen=false;
-
-window.addEventListener('scroll',()=>{
-  navbar.classList.toggle('scrolled',window.scrollY>50);
-});
-navbar.classList.add('scrolled');
-
-hamburgerBtn.addEventListener('click',()=>{
-  menuOpen=!menuOpen;
-  mobileDropdown.classList.toggle('open',menuOpen);
-  backdrop.classList.toggle('show',menuOpen);
-  navbar.classList.toggle('menu-open',menuOpen);
-});
-
-function closeMenu(){
-  menuOpen=false;
-  mobileDropdown.classList.remove('open');
-  backdrop.classList.remove('show');
-  navbar.classList.remove('menu-open');
-}
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
+hamburger.addEventListener('click',()=>{menuOpen=!menuOpen;dropdown.classList.toggle('open',menuOpen);backdrop.classList.toggle('show',menuOpen);nav.classList.toggle('menu-open',menuOpen);hamburger.innerHTML=menuOpen?'<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>':'<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/></svg>'});
+function closeMenu(){menuOpen=false;dropdown.classList.remove('open');backdrop.classList.remove('show');nav.classList.remove('menu-open');hamburger.innerHTML='<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/></svg>'}
+window.addEventListener('resize',()=>{if(window.innerWidth>=1024)closeMenu()});
 </script>
 </body>
 </html>
