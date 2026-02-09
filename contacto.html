@@ -120,7 +120,7 @@ a{text-decoration:none;color:inherit}
 select{width:100%;padding:.75rem 1rem;border:1px solid #ddd;font-family:'DM Sans',sans-serif;font-size:.875rem;background:#fff;color:#1A1A1A;appearance:auto;border-radius:4px}
 select:focus{border-color:#3E582F;outline:none}
 .response-promise{text-align:center;color:#3E582F;font-size:.8rem;margin-top:1rem;letter-spacing:.05em}
-</style>
+.form-success{text-align:center;padding:3rem 1rem}</style>
 </head>
 <body>
 
@@ -199,7 +199,14 @@ select:focus{border-color:#3E582F;outline:none}
       </div>
     </div>
     <div class="contact-right">
-      <form class="contact-form" onsubmit="handleSubmit(event)">
+      <form class="contact-form" action="https://formsubmit.co/hello@victorsdou.pe" method="POST">
+        <!-- FormSubmit config -->
+        <input type="hidden" name="_cc" value="luis@victorsdou.pe">
+        <input type="hidden" name="_subject" value="Nuevo contacto desde victorsdou.vercel.app">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://victorsdou.vercel.app/contacto.html?enviado=true">
+        <input type="text" name="_honey" style="display:none">
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Nombre</label>
@@ -248,7 +255,7 @@ select:focus{border-color:#3E582F;outline:none}
           <label class="form-label">Mensaje</label>
           <textarea name="mensaje" class="form-textarea" required></textarea>
         </div>
-        <button type="submit" class="form-submit">ENVIAR</button>
+        <button type="submit" class="form-submit">ENVIAR MENSAJE</button>
         <p style="text-align:center;color:#3E582F;font-size:.8rem;margin-top:1rem;letter-spacing:.05em">⏱ Respondemos en 24 horas hábiles</p>
       </form>
     </div>
@@ -307,7 +314,11 @@ function closeMenu(){menuOpen=false;dropdown.classList.remove('open');backdrop.c
 window.addEventListener('resize',()=>{if(window.innerWidth>=1024)closeMenu()});
 
 // Form submission
-function handleSubmit(e){e.preventDefault();alert('Gracias por tu mensaje. Nos pondremos en contacto pronto.');e.target.reset()}
+// Check if returning from successful submission
+if(window.location.search.includes('enviado=true')){
+  document.querySelector('.contact-form').innerHTML='<div style="text-align:center;padding:3rem 1rem"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#3E582F" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h3 style="margin:1.5rem 0 .75rem;font-size:1.5rem">¡Mensaje enviado!</h3><p style="color:#666;font-size:1rem;max-width:24rem;margin:0 auto">Gracias por contactarnos. Nuestro equipo te responderá en las próximas 24 horas hábiles.</p></div>';
+  history.replaceState(null,'','contacto.html');
+}
 </script>
 </body>
 </html>
