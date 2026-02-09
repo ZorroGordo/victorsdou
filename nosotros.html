@@ -539,16 +539,11 @@ window.addEventListener('resize',()=>{if(window.innerWidth>=1024)closeMenu()});
 
 <!-- GA4 Event Tracking via gtag -->
 <script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+
 function gtagEvent(name, params) {
-  // gtag is made available by the Google Tag loaded through GTM
-  if (typeof gtag === 'function') {
-    gtag('event', name, params);
-  } else {
-    // Fallback: push to dataLayer for GTM to pick up
-    window.dataLayer = window.dataLayer || [];
-    params.event = name;
-    dataLayer.push(params);
-  }
+  gtag('event', name, params);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
