@@ -679,10 +679,11 @@ stickyB2B.style.display=window.innerWidth<1024?'block':'none';
 
 <!-- GA4 Event Tracking via gtag -->
 <script>
+window.dataLayer = window.dataLayer || [];
+if (typeof gtag !== 'function') { function gtag(){dataLayer.push(arguments);} window.gtag = gtag; }
+
 function gtagEvent(name, params) {
-  if (typeof gtag === 'function') {
-    gtag('event', name, params);
-  }
+  gtag('event', name, params);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
