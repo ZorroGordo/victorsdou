@@ -136,6 +136,14 @@ select:focus{border-color:#3E582F;outline:none}
 .form-success{text-align:center;padding:3rem 1rem}
 /* FIX: Prevent horizontal overflow on mobile */
 html,body{overflow-x:hidden;max-width:100vw}
+
+/* Cart badge */
+.nav-cart{display:inline-flex;align-items:center;}
+.nav-cart svg{vertical-align:middle;}
+.cart-badge{position:absolute;top:-6px;right:-10px;background:#1A1A1A;color:#fff;font-size:.6rem;font-weight:700;min-width:16px;height:16px;border-radius:999px;display:flex;align-items:center;justify-content:center;line-height:1;padding:0 4px;}
+.nav.scrolled .cart-badge,.nav.menu-open .cart-badge{background:#1A1A1A;color:#fff;}
+.nav:not(.scrolled) .cart-badge{background:#fff;color:#1A1A1A;}
+.cart-badge-mobile{display:inline-block;background:#1A1A1A;color:#fff;font-size:.6rem;font-weight:700;min-width:16px;height:16px;border-radius:999px;text-align:center;line-height:16px;padding:0 4px;margin-left:6px;}
 </style>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -160,6 +168,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="nav-left">
         <a href="/recetas" class="nav-link">RECETAS</a>
         <a href="/blog" class="nav-link">BLOG</a>
+        <a href="/nosotros" class="nav-link">NOSOTROS</a>
       </div>
       <a href="/">
         <svg class="nav-logo" viewBox="0 0 238 41" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -167,8 +176,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </svg>
       </a>
       <div class="nav-right">
-        <a href="/nosotros" class="nav-link">NOSOTROS</a>
         <a href="/contacto" class="nav-link">CONTACTO</a>
+        <a href="/tienda" class="nav-link">TIENDA</a>
+        <a href="/carrito" class="nav-link nav-cart" id="navCartLink" style="position:relative;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+        </a>
+        <a href="/login" class="nav-link" id="navAccountLink">MI CUENTA</a>
       </div>
     </div>
     <div class="nav-mobile">
@@ -191,6 +205,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/blog" onclick="closeMenu()">BLOG</a>
       <a href="/nosotros" onclick="closeMenu()">NOSOTROS</a>
       <a href="/contacto" onclick="closeMenu()">CONTACTO</a>
+      <div style="height:1px;background:rgba(0,0,0,.1);margin:.75rem 0;"></div>
+      <a href="/tienda" onclick="closeMenu()">TIENDA</a>
+      <a href="/carrito" onclick="closeMenu()">MI CARRITO <span class="cart-badge-mobile" id="cartBadgeMobile" style="display:none;">0</span></a>
+      <a href="/login" onclick="closeMenu()" id="navAccountLinkMobile">MI CUENTA</a>
     </div>
   </div>
 </nav>
@@ -476,5 +494,57 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+
+<!-- Cart Badge Sync -->
+<script>
+(function(){
+  function updateCartBadge(){
+    try{
+      var raw=localStorage.getItem('victorsdou-cart');
+      if(!raw)return hideBadge();
+      var data=JSON.parse(raw);
+      var state=data.state||data;
+      var items=state.items||[];
+      var count=0;
+      for(var i=0;i<items.length;i++){count+=items[i].quantity||1;}
+      if(count>0){
+        var b=document.getElementById('cartBadge');
+        var bm=document.getElementById('cartBadgeMobile');
+        if(b){b.textContent=count>99?'99+':count;b.style.display='flex';}
+        if(bm){bm.textContent=count>99?'99+':count;bm.style.display='inline-block';}
+      }else{hideBadge();}
+    }catch(e){hideBadge();}
+  }
+  function hideBadge(){
+    var b=document.getElementById('cartBadge');
+    var bm=document.getElementById('cartBadgeMobile');
+    if(b)b.style.display='none';
+    if(bm)bm.style.display='none';
+  }
+  // Check auth state and update MI CUENTA link
+  function updateAccountLink(){
+    try{
+      var token=document.cookie.match(/auth_token=([^;]+)/);
+      var link=document.getElementById('navAccountLink');
+      var linkM=document.getElementById('navAccountLinkMobile');
+      if(token&&token[1]){
+        if(link){link.href='/cuenta';link.textContent='MI CUENTA';}
+        if(linkM){linkM.href='/cuenta';linkM.textContent='MI CUENTA';}
+      }else{
+        if(link){link.href='/login';link.textContent='MI CUENTA';}
+        if(linkM){linkM.href='/login';linkM.textContent='MI CUENTA';}
+      }
+    }catch(e){}
+  }
+  updateCartBadge();
+  updateAccountLink();
+  // Listen for storage changes (when cart updates in another tab / Next.js app)
+  window.addEventListener('storage',function(e){
+    if(e.key==='victorsdou-cart')updateCartBadge();
+  });
+  // Also poll every 2s in case same-tab updates
+  setInterval(updateCartBadge,2000);
+})();
+</script>
 </body>
 </html>
