@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Victorsdou - Matching Figma Design */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  ::selection {
+    @apply bg-green/20 text-charcoal;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-green;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-semibold;
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* Outlined button style from Figma */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 text-sm font-medium tracking-wide
+           border border-charcoal text-charcoal bg-transparent
+           hover:bg-charcoal hover:text-cream
+           transition-all duration-200;
+  }
+
+  /* Green filled button */
+  .btn-green {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 text-sm font-medium tracking-wide
+           bg-green text-white
+           hover:bg-green-dark
+           transition-all duration-200;
+  }
+
+  /* Container */
+  .container-main {
+    @apply max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
