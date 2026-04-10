@@ -561,16 +561,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-/* Apply IGV (18 %) to a base price → final consumer price */
-function withIGV(base){ return Math.round(base * 1.18 * 100) / 100; }
-/* Get the best price from a cart product: prefer display price, then base */
+/* Get the display price — stored price already includes IGV */
 function getItemPrice(p){
-  var raw = parseFloat(p.price || p.basePricePen || p.precio || 0);
-  /* If the stored price already includes IGV (≥ base*1.17) use it as-is;
-     otherwise apply IGV. This handles both old (pre-IGV) and new (post-fix) items. */
-  var base = parseFloat(p.basePricePen || 0);
-  if(base > 0 && raw >= base * 1.17) return raw; /* already has IGV */
-  return withIGV(raw);
+  return parseFloat(p.price || p.basePricePen || p.precio || 0);
 }
 /* Build the image src: prefer stored image, fall back to API by slug/sku */
 function getItemImage(p){
@@ -600,7 +593,7 @@ function renderCart(){
       +img
       +'<div class="cart-item-body">'
       +'<div class="cart-item-name">'+escHtml(p.name||p.nombre||'')+'</div>'
-      +'<div class="cart-item-price">S/ '+price.toFixed(2)+' / unidad <span style="color:#999;font-size:.75rem">(IGV incl.)</span></div>'
+      +'<div class="cart-item-price">S/ '+price.toFixed(2)+' / unidad</div>'
       +'<div class="qty-controls">'
       +'<button class="qty-btn" onclick="changeQty('+idx+',-1)">−</button>'
       +'<span class="qty-val">'+qty+'</span>'
@@ -612,7 +605,7 @@ function renderCart(){
       +'</div>';
   });
   html+='<div class="cart-footer">'
-    +'<div class="cart-total"><span class="cart-total-label">Total (IGV incl.)</span><span class="cart-total-amount">S/ '+total.toFixed(2)+'</span></div>'
+    +'<div class="cart-total"><span class="cart-total-label">Total</span><span class="cart-total-amount">S/ '+total.toFixed(2)+'</span></div>'
     +'<a href="/checkout" class="btn-checkout">PROCEDER AL PAGO</a>'
     +'<a href="/tienda" class="btn-continue">← Seguir comprando</a>'
     +'</div>';

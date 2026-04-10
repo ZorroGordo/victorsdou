@@ -278,7 +278,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Delivery slot -->
       <div class="checkout-block">
         <h3>Fecha y hora de entrega</h3>
-        <div class="slots-grid" id="slotsGrid"></div>
+        <p style="font-size:.8rem;color:#888;margin-bottom:.75rem">Mínimo 36 horas de anticipación</p>
+        <label class="form-label">Fecha</label>
+        <div class="slots-grid" id="dateGrid"></div>
+        <div id="timeSection" style="display:none;margin-top:1.25rem">
+          <label class="form-label">Hora</label>
+          <div class="slots-grid" id="timeGrid"></div>
+        </div>
         <p id="slotError" style="color:#c00;font-size:.8rem;margin-top:.5rem;display:none">Por favor selecciona una fecha y hora.</p>
       </div>
       <!-- Invoice type -->
@@ -651,31 +657,50 @@ function updateDelivery(){
   document.getElementById('summaryTotal').textContent='S/ '+(cartSubtotal+deliveryFee).toFixed(2);
 }
 
-// Generate slots
+// Generate date options (36h minimum lead time, next 10 days)
+var selectedDate=null;
+var times=[{id:'morning',label:'Mañana',range:'8:00 - 12:00'},{id:'afternoon',label:'Tarde',range:'12:00 - 17:00'}];
 (function(){
   var days=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
   var months=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-  var times=[{id:'morning',label:'Mañana',range:'8:00 - 12:00'},{id:'afternoon',label:'Tarde',range:'12:00 - 17:00'},{id:'evening',label:'Noche',range:'17:00 - 21:00'}];
-  var grid=document.getElementById('slotsGrid');
+  var minDate=new Date(); minDate.setHours(minDate.getHours()+36);
+  var dateGrid=document.getElementById('dateGrid');
   var html='';
-  for(var d=1;d<=7;d++){
+  for(var d=0;d<=10;d++){
     var dt=new Date(); dt.setDate(dt.getDate()+d);
+    if(dt<minDate) continue;
     var dateStr=dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
     var dateLabel=days[dt.getDay()]+' '+dt.getDate()+' '+months[dt.getMonth()];
-    times.forEach(function(t){
-      html+='<button class="slot-btn" onclick="selectSlot(this,\''+dateStr+'\',\''+t.range+'\',\''+dateLabel+'\')">'
-        +'<div class="slot-date">'+dateLabel+'</div>'
-        +'<div class="slot-time">'+t.label+' '+t.range+'</div>'
-        +'</button>';
-    });
+    html+='<button class="slot-btn" onclick="selectDate(this,\''+dateStr+'\',\''+dateLabel+'\')">'
+      +'<div class="slot-date">'+dateLabel+'</div>'
+      +'</button>';
   }
-  grid.innerHTML=html;
+  dateGrid.innerHTML=html;
 })();
 
-function selectSlot(btn,date,range,label){
-  document.querySelectorAll('.slot-btn').forEach(function(b){b.classList.remove('selected');});
+function selectDate(btn,date,label){
+  selectedDate={date:date,label:label};
+  selectedSlot=null;
+  document.querySelectorAll('#dateGrid .slot-btn').forEach(function(b){b.classList.remove('selected');});
   btn.classList.add('selected');
-  selectedSlot={date:date,timeRange:range,label:label};
+  // Show time options
+  var timeGrid=document.getElementById('timeGrid');
+  var html='';
+  times.forEach(function(t){
+    html+='<button class="slot-btn" onclick="selectTime(this,\''+t.range+'\',\''+t.label+'\')">'
+      +'<div class="slot-time">'+t.label+'</div>'
+      +'<div class="slot-date">'+t.range+'</div>'
+      +'</button>';
+  });
+  timeGrid.innerHTML=html;
+  document.getElementById('timeSection').style.display='block';
+  document.getElementById('slotError').style.display='none';
+}
+
+function selectTime(btn,range,label){
+  document.querySelectorAll('#timeGrid .slot-btn').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+  selectedSlot={date:selectedDate.date,timeRange:range,label:selectedDate.label+' — '+label+' '+range};
   document.getElementById('slotError').style.display='none';
 }
 function toggleInvoice(t){
@@ -685,13 +710,9 @@ function toggleInvoice(t){
   document.getElementById('optFactura').classList.toggle('selected',t==='factura');
 }
 
-/* Apply IGV (18 %) to a base price → final consumer price */
-function withIGV(base){ return Math.round(base * 1.18 * 100) / 100; }
+/* Get the display price — stored price already includes IGV */
 function getItemPrice(p){
-  var raw = parseFloat(p.price || p.basePricePen || p.precio || 0);
-  var base = parseFloat(p.basePricePen || 0);
-  if(base > 0 && raw >= base * 1.17) return raw;
-  return withIGV(raw);
+  return parseFloat(p.price || p.basePricePen || p.precio || 0);
 }
 
 // Render summary
