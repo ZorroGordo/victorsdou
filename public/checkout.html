@@ -288,8 +288,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <label class="radio-opt selected" id="optBoleta"><input type="radio" name="invoice" value="boleta" checked onchange="toggleInvoice('boleta')"> Boleta</label>
           <label class="radio-opt" id="optFactura"><input type="radio" name="invoice" value="factura" onchange="toggleInvoice('factura')"> Factura</label>
         </div>
+        <div id="boletaFields" style="margin-top:1rem">
+          <div class="form-group"><label class="form-label">DNI</label><input class="form-input" id="coDni" placeholder="12345678" maxlength="8"></div>
+        </div>
         <div class="factura-fields" id="facturaFields">
-          <div class="form-group" style="margin-top:1rem"><label class="form-label">RUC</label><input class="form-input" id="coRuc" placeholder="20606963123"></div>
+          <div class="form-group" style="margin-top:1rem"><label class="form-label">RUC</label><input class="form-input" id="coRuc" placeholder="20606963123" maxlength="11"></div>
           <div class="form-group" style="margin-top:1rem"><label class="form-label">Razón Social</label><input class="form-input" id="coRazon" placeholder="Empresa S.A.C."></div>
         </div>
       </div>
@@ -304,8 +307,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="checkout-block">
         <h3>Resumen del pedido</h3>
         <div id="summaryItems"></div>
-        <div class="summary-item" id="subtotalRow" style="display:none;color:#666;font-size:.9rem"><span>Subtotal</span><span id="summarySubtotal">S/ 0.00</span></div>
-        <div class="summary-item" id="deliveryRow" style="display:none;color:#666;font-size:.9rem"><span>Delivery</span><span id="deliveryCost">S/ 0.00</span></div>
+        <div class="summary-item" id="subtotalRow" style="color:#666;font-size:.9rem"><span>Subtotal</span><span id="summarySubtotal">S/ 0.00</span></div>
+        <div class="summary-item" id="deliveryRow" style="color:#666;font-size:.9rem"><span>Delivery</span><span id="deliveryCost" style="font-style:italic;color:#aaa">Selecciona distrito</span></div>
         <div class="summary-total"><span>Total</span><span id="summaryTotal">S/ 0.00</span></div>
         <button class="btn-pay" id="btnPay" onclick="doPay()">PAGAR CON TARJETA</button>
         <p style="font-size:.7rem;color:#aaa;text-align:center;margin-top:.75rem">Pago seguro procesado por Culqi</p>
@@ -635,12 +638,15 @@ function getDeliveryFee(district){
 function updateDelivery(){
   var district=document.getElementById('coDistrict').value;
   deliveryFee=district ? getDeliveryFee(district) : 0;
-  var show=district && deliveryFee>0;
-  document.getElementById('subtotalRow').style.display=show?'':'none';
-  document.getElementById('deliveryRow').style.display=show?'':'none';
-  if(show){
-    document.getElementById('summarySubtotal').textContent='S/ '+cartSubtotal.toFixed(2);
+  document.getElementById('summarySubtotal').textContent='S/ '+cartSubtotal.toFixed(2);
+  if(district){
     document.getElementById('deliveryCost').textContent='S/ '+deliveryFee.toFixed(2);
+    document.getElementById('deliveryCost').style.fontStyle='normal';
+    document.getElementById('deliveryCost').style.color='inherit';
+  } else {
+    document.getElementById('deliveryCost').textContent='Selecciona distrito';
+    document.getElementById('deliveryCost').style.fontStyle='italic';
+    document.getElementById('deliveryCost').style.color='#aaa';
   }
   document.getElementById('summaryTotal').textContent='S/ '+(cartSubtotal+deliveryFee).toFixed(2);
 }
@@ -673,6 +679,7 @@ function selectSlot(btn,date,range,label){
   document.getElementById('slotError').style.display='none';
 }
 function toggleInvoice(t){
+  document.getElementById('boletaFields').style.display=t==='boleta'?'block':'none';
   document.getElementById('facturaFields').style.display=t==='factura'?'block':'none';
   document.getElementById('optBoleta').classList.toggle('selected',t==='boleta');
   document.getElementById('optFactura').classList.toggle('selected',t==='factura');
@@ -685,7 +692,7 @@ function toggleInvoice(t){
   var html='';
   items.forEach(function(item){
     var p=item.product||item;
-    var price=parseFloat(p.basePricePen||p.price||0);
+    var price=parseFloat(p.price||p.basePricePen||0);
     var qty=item.quantity||1;
     cartSubtotal+=price*qty;
     html+='<div class="summary-item"><span>'+escHtml(p.name||'')+(qty>1?' x'+qty:'')+'</span><span>S/ '+(price*qty).toFixed(2)+'</span></div>';
@@ -693,6 +700,8 @@ function toggleInvoice(t){
   document.getElementById('summaryItems').innerHTML=html;
   document.getElementById('summarySubtotal').textContent='S/ '+cartSubtotal.toFixed(2);
   document.getElementById('summaryTotal').textContent='S/ '+cartSubtotal.toFixed(2);
+  // Update delivery display (shows "Selecciona distrito" by default)
+  updateDelivery();
   // Pre-fill from user
   try{ var u=JSON.parse(localStorage.getItem('vd_user')||'null');
     if(u){ document.getElementById('coEmail').value=u.email||''; document.getElementById('coPhone').value=u.phone||''; }
@@ -718,6 +727,7 @@ async function doPay(){
   var district=document.getElementById('coDistrict').value.trim();
   var city=document.getElementById('coCity').value.trim()||'Lima';
   var invoiceType=document.querySelector('input[name=invoice]:checked').value;
+  var dni=document.getElementById('coDni').value.trim();
   var ruc=document.getElementById('coRuc').value.trim();
   var razon=document.getElementById('coRazon').value.trim();
   var notes=document.getElementById('coNotes').value.trim();
@@ -725,10 +735,11 @@ async function doPay(){
 
   if(!email||!phone||!street||!district){ showToast('Por favor completa todos los campos requeridos.',false); return; }
   if(!selectedSlot){ document.getElementById('slotError').style.display='block'; showToast('Selecciona una fecha y hora de entrega.',false); return; }
+  if(invoiceType==='boleta'&&!dni){ showToast('Ingresa tu DNI para la boleta.',false); return; }
   if(invoiceType==='factura'&&(!ruc||!razon)){ showToast('Completa los datos de facturación.',false); return; }
 
   var items=getCart();
-  var subtotal=items.reduce(function(s,i){return s+parseFloat((i.product||i).basePricePen||(i.product||i).price||0)*(i.quantity||1);},0);
+  var subtotal=items.reduce(function(s,i){return s+parseFloat((i.product||i).price||(i.product||i).basePricePen||0)*(i.quantity||1);},0);
   var total=subtotal+deliveryFee;
 
   btn.textContent='Procesando...'; btn.disabled=true;
@@ -743,6 +754,7 @@ async function doPay(){
       deliveryFee:deliveryFee,
       items:items.map(function(i){var p=i.product||i;return{productVariantId:p.variantId||p.id,quantity:i.quantity||1,isSubscription:false};})
     };
+    if(invoiceType==='boleta'){ orderBody.dni=dni; }
     if(invoiceType==='factura'){ orderBody.ruc=ruc; orderBody.razonSocial=razon; }
 
     var orderRes=await apiFetch('/orders',{method:'POST',body:JSON.stringify(orderBody)});

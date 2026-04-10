@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import type { Product } from '@/lib/types'
+import { getDisplayPrice } from '@/lib/types'
 import { trackAddToCart } from '@/lib/analytics'
 
 const CART_KEY = 'victorsdou-cart'
@@ -12,7 +13,7 @@ export function AddToCartSection({ product }: { product: Product }) {
   const handleAddToCart = () => {
     trackAddToCart(product, quantity)
 
-    const price = product.ecommercePrice ?? product.basePricePen
+    const price = getDisplayPrice(product) // IGV-included price
     const cartItem = {
       product: {
         id: product.id,
