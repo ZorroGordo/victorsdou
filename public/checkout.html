@@ -685,6 +685,15 @@ function toggleInvoice(t){
   document.getElementById('optFactura').classList.toggle('selected',t==='factura');
 }
 
+/* Apply IGV (18 %) to a base price → final consumer price */
+function withIGV(base){ return Math.round(base * 1.18 * 100) / 100; }
+function getItemPrice(p){
+  var raw = parseFloat(p.price || p.basePricePen || p.precio || 0);
+  var base = parseFloat(p.basePricePen || 0);
+  if(base > 0 && raw >= base * 1.17) return raw;
+  return withIGV(raw);
+}
+
 // Render summary
 (function(){
   var items=getCart();
@@ -692,7 +701,7 @@ function toggleInvoice(t){
   var html='';
   items.forEach(function(item){
     var p=item.product||item;
-    var price=parseFloat(p.price||p.basePricePen||0);
+    var price=getItemPrice(p);
     var qty=item.quantity||1;
     cartSubtotal+=price*qty;
     html+='<div class="summary-item"><span>'+escHtml(p.name||'')+(qty>1?' x'+qty:'')+'</span><span>S/ '+(price*qty).toFixed(2)+'</span></div>';
@@ -739,7 +748,7 @@ async function doPay(){
   if(invoiceType==='factura'&&(!ruc||!razon)){ showToast('Completa los datos de facturación.',false); return; }
 
   var items=getCart();
-  var subtotal=items.reduce(function(s,i){return s+parseFloat((i.product||i).price||(i.product||i).basePricePen||0)*(i.quantity||1);},0);
+  var subtotal=items.reduce(function(s,i){ var p=i.product||i; return s+getItemPrice(p)*(i.quantity||1);},0);
   var total=subtotal+deliveryFee;
 
   btn.textContent='Procesando...'; btn.disabled=true;

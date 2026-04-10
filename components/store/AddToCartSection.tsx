@@ -5,6 +5,9 @@ import type { Product } from '@/lib/types'
 import { getDisplayPrice } from '@/lib/types'
 import { trackAddToCart } from '@/lib/analytics'
 
+/** IGV factor (18%) – always applied at display-time in carrito/checkout HTML */
+const IGV = 1.18
+
 const CART_KEY = 'victorsdou-cart'
 
 export function AddToCartSection({ product }: { product: Product }) {
@@ -20,7 +23,8 @@ export function AddToCartSection({ product }: { product: Product }) {
         slug: product.sku,
         name: product.name,
         price,
-        image: product.imageUrl ?? '',
+        basePricePen: product.ecommercePrice ?? product.basePricePen,
+        image: `/api/store/product-image/${product.sku}`,
         description: product.description ?? '',
         category: product.category ?? product.category_name ?? '',
         unit: product.unitOfSale ?? 'und',
