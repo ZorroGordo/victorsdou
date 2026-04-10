@@ -813,6 +813,33 @@ async function doPay(){
     var payData=payRes?await payRes.json():{success:false};
     if(!payData.success){ throw new Error(payData.message||'Pago rechazado'); }
 
+    // Send confirmation emails (customer + team) — fire-and-forget
+    try{
+      fetch('/api/send-order-email',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          customerName:email,
+          customerEmail:email,
+          customerPhone:phone,
+          orderId:order.id,
+          items:items.map(function(i){var p=i.product||i;return{name:p.name||p.productName||'Producto',quantity:i.quantity||1,unitPrice:getItemPrice(p)};}),
+          subtotal:subtotal,
+          deliveryFee:deliveryFee,
+          total:total,
+          deliveryDate:selectedSlot.date,
+          deliveryTimeRange:selectedSlot.timeRange,
+          deliveryTimeLabel:selectedSlot.label,
+          address:{street:street,district:district,city:city},
+          invoiceType:invoiceType,
+          dni:invoiceType==='boleta'?dni:undefined,
+          ruc:invoiceType==='factura'?ruc:undefined,
+          razonSocial:invoiceType==='factura'?razon:undefined,
+          notes:notes||undefined
+        })
+      });
+    }catch(emailErr){ console.error('Email send error:',emailErr); }
+
     saveCart([]);
     showToast('¡Pago exitoso! Gracias por tu pedido.');
     setTimeout(function(){ window.location.href='/'; },2000);
