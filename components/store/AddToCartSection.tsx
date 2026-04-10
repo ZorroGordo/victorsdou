@@ -2,11 +2,7 @@
 
 import { useState } from 'react'
 import type { Product } from '@/lib/types'
-import { getDisplayPrice } from '@/lib/types'
 import { trackAddToCart } from '@/lib/analytics'
-
-/** IGV factor (18%) – always applied at display-time in carrito/checkout HTML */
-const IGV = 1.18
 
 const CART_KEY = 'victorsdou-cart'
 
@@ -16,14 +12,14 @@ export function AddToCartSection({ product }: { product: Product }) {
   const handleAddToCart = () => {
     trackAddToCart(product, quantity)
 
-    const price = getDisplayPrice(product) // IGV-included price
+    // Store base price – IGV (18%) is applied at display-time in carrito/checkout
+    const price = product.ecommercePrice ?? product.basePricePen
     const cartItem = {
       product: {
         id: product.id,
         slug: product.sku,
         name: product.name,
         price,
-        basePricePen: product.ecommercePrice ?? product.basePricePen,
         image: `/api/store/product-image/${product.sku}`,
         description: product.description ?? '',
         category: product.category ?? product.category_name ?? '',

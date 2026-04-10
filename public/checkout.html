@@ -279,8 +279,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="checkout-block">
         <h3>Fecha y hora de entrega</h3>
         <p style="font-size:.8rem;color:#888;margin-bottom:.75rem">Mínimo 36 horas de anticipación</p>
-        <label class="form-label">Fecha</label>
-        <div class="slots-grid" id="dateGrid"></div>
+        <label class="form-label" for="dateInput">Fecha</label>
+        <input type="date" id="dateInput" class="form-input" style="width:100%;padding:.75rem 1rem;border:1px solid #ddd;border-radius:8px;font-size:1rem;color:#333;margin-bottom:.25rem" />
         <div id="timeSection" style="display:none;margin-top:1.25rem">
           <label class="form-label">Hora</label>
           <div class="slots-grid" id="timeGrid"></div>
@@ -657,45 +657,43 @@ function updateDelivery(){
   document.getElementById('summaryTotal').textContent='S/ '+(cartSubtotal+deliveryFee).toFixed(2);
 }
 
-// Generate date options (36h minimum lead time, next 10 days)
+// Date picker with 36h minimum lead time
 var selectedDate=null;
 var times=[{id:'morning',label:'Mañana',range:'8:00 - 12:00'},{id:'afternoon',label:'Tarde',range:'12:00 - 17:00'}];
 (function(){
-  var days=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-  var months=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
   var minDate=new Date(); minDate.setHours(minDate.getHours()+36);
-  var dateGrid=document.getElementById('dateGrid');
-  var html='';
-  for(var d=0;d<=10;d++){
-    var dt=new Date(); dt.setDate(dt.getDate()+d);
-    if(dt<minDate) continue;
-    var dateStr=dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
+  // Set min to that day (YYYY-MM-DD)
+  var minStr=minDate.getFullYear()+'-'+String(minDate.getMonth()+1).padStart(2,'0')+'-'+String(minDate.getDate()).padStart(2,'0');
+  // Allow up to 60 days in the future
+  var maxDate=new Date(); maxDate.setDate(maxDate.getDate()+60);
+  var maxStr=maxDate.getFullYear()+'-'+String(maxDate.getMonth()+1).padStart(2,'0')+'-'+String(maxDate.getDate()).padStart(2,'0');
+  var dateInput=document.getElementById('dateInput');
+  dateInput.min=minStr;
+  dateInput.max=maxStr;
+  dateInput.addEventListener('change',function(){
+    var val=this.value;
+    if(!val) return;
+    var days=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+    var months=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+    var parts=val.split('-');
+    var dt=new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]));
     var dateLabel=days[dt.getDay()]+' '+dt.getDate()+' '+months[dt.getMonth()];
-    html+='<button class="slot-btn" onclick="selectDate(this,\''+dateStr+'\',\''+dateLabel+'\')">'
-      +'<div class="slot-date">'+dateLabel+'</div>'
-      +'</button>';
-  }
-  dateGrid.innerHTML=html;
-})();
-
-function selectDate(btn,date,label){
-  selectedDate={date:date,label:label};
-  selectedSlot=null;
-  document.querySelectorAll('#dateGrid .slot-btn').forEach(function(b){b.classList.remove('selected');});
-  btn.classList.add('selected');
-  // Show time options
-  var timeGrid=document.getElementById('timeGrid');
-  var html='';
-  times.forEach(function(t){
-    html+='<button class="slot-btn" onclick="selectTime(this,\''+t.range+'\',\''+t.label+'\')">'
-      +'<div class="slot-time">'+t.label+'</div>'
-      +'<div class="slot-date">'+t.range+'</div>'
-      +'</button>';
+    selectedDate={date:val,label:dateLabel};
+    selectedSlot=null;
+    // Show time options
+    var timeGrid=document.getElementById('timeGrid');
+    var html='';
+    times.forEach(function(t){
+      html+='<button class="slot-btn" onclick="selectTime(this,\''+t.range+'\',\''+t.label+'\')">'
+        +'<div class="slot-time">'+t.label+'</div>'
+        +'<div class="slot-date">'+t.range+'</div>'
+        +'</button>';
+    });
+    timeGrid.innerHTML=html;
+    document.getElementById('timeSection').style.display='block';
+    document.getElementById('slotError').style.display='none';
   });
-  timeGrid.innerHTML=html;
-  document.getElementById('timeSection').style.display='block';
-  document.getElementById('slotError').style.display='none';
-}
+})();
 
 function selectTime(btn,range,label){
   document.querySelectorAll('#timeGrid .slot-btn').forEach(function(b){b.classList.remove('selected');});
@@ -710,9 +708,10 @@ function toggleInvoice(t){
   document.getElementById('optFactura').classList.toggle('selected',t==='factura');
 }
 
-/* Get the display price — stored price already includes IGV */
+/* Get the display price — apply 18% IGV to stored base price */
 function getItemPrice(p){
-  return parseFloat(p.price || p.basePricePen || p.precio || 0);
+  var base = parseFloat(p.price || p.basePricePen || p.precio || 0);
+  return Math.round(base * 1.18 * 100) / 100;
 }
 
 // Render summary

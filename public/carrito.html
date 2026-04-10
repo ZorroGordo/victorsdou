@@ -561,9 +561,10 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-/* Get the display price — stored price already includes IGV */
+/* Get the display price — apply 18% IGV to stored base price */
 function getItemPrice(p){
-  return parseFloat(p.price || p.basePricePen || p.precio || 0);
+  var base = parseFloat(p.price || p.basePricePen || p.precio || 0);
+  return Math.round(base * 1.18 * 100) / 100;
 }
 /* Build the image src: prefer stored image, fall back to API by slug/sku */
 function getItemImage(p){
