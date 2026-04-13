@@ -27,7 +27,7 @@ export async function sendEmail(opts: {
   subject: string;
   html: string;
   text?: string;
-}): Promise<{ ok: boolean; error?: string }> {
+}): Promise<{ ok: boolean; error?: string; messageId?: string }> {
   const toAddresses = Array.isArray(opts.to) ? opts.to : [opts.to];
   if (!toAddresses.length) return { ok: false, error: "No recipients" };
 
