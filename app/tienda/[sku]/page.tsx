@@ -55,8 +55,40 @@ export default async function ProductPage({ params }: PageProps) {
   // Count images for the gallery (check how many images the product has)
   const imageCount = 1 // Default to 1, can be enhanced if product has multiple images
 
+  // Product + BreadcrumbList schema for SEO
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: titleCase(product.name),
+    description: product.description || `Pan artesanal de masa madre: ${titleCase(product.name)}`,
+    sku: product.sku,
+    image: `https://victorsdou.pe/api/store/product-image/${product.sku}`,
+    brand: { '@type': 'Brand', name: 'Victorsdou' },
+    offers: {
+      '@type': 'Offer',
+      url: `https://victorsdou.pe/tienda/${product.sku}`,
+      priceCurrency: 'PEN',
+      price: displayPrice.toFixed(2),
+      priceValidUntil: '2027-12-31',
+      availability: 'https://schema.org/InStock',
+      seller: { '@type': 'Organization', name: 'Victorsdou' },
+    },
+  }
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Tienda', item: 'https://victorsdou.pe/tienda' },
+      { '@type': 'ListItem', position: 2, name: titleCase(product.category || product.category_name || 'Panes'), item: `https://victorsdou.pe/tienda?cat=${(product.category || product.category_name || '').toLowerCase().replace(/\s+/g, '-')}` },
+      { '@type': 'ListItem', position: 3, name: titleCase(product.name) },
+    ],
+  }
+
   return (
     <div className="min-h-screen bg-cream">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       {/* GA4 Ecommerce: track view_item */}
       <TrackViewItem product={product} />
 

@@ -57,8 +57,25 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Bakery',
   name: 'Victorsdou',
-  description: 'Panadería nórdica de masa madre en Lima, Perú.',
+  description: 'Panadería nórdica de masa madre artesanal en Lima, Perú. Pan, croissants, brioche y más con entrega a domicilio.',
   url: 'https://victorsdou.pe',
+  logo: 'https://victorsdou.pe/images/logo.svg',
+  image: 'https://victorsdou.pe/assets/uploads/hero-bg.jpg',
+  telephone: '+51915321600',
+  email: 'hello@victorsdou.pe',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Lima',
+    addressCountry: 'PE',
+  },
+  sameAs: [
+    'https://www.instagram.com/victorsdou/',
+    'https://www.facebook.com/victorsdou/',
+    'https://www.tiktok.com/@victorsdou',
+  ],
+  priceRange: 'S/ 5 - S/ 40',
+  servesCuisine: ['Pan artesanal', 'Masa madre', 'Panadería nórdica'],
+  hasMenu: 'https://victorsdou.pe/tienda',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
