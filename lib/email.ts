@@ -203,9 +203,11 @@ export interface OrderEmailData {
 }
 
 // ── Helper: IGV breakdown ─────────────────────────────────────────────────
-function igv(subtotalInclIgv: number) {
-  const base = subtotalInclIgv / 1.18;
-  const tax = subtotalInclIgv - base;
+// All customer-facing amounts (products + delivery) include IGV in Peru.
+// This extracts the base (valor de venta) and tax from an IGV-inclusive amount.
+function igv(amountInclIgv: number) {
+  const base = amountInclIgv / 1.18;
+  const tax = amountInclIgv - base;
   return { base, tax };
 }
 
@@ -222,7 +224,8 @@ export function buildCustomerConfirmationEmail(data: OrderEmailData): string {
     )
     .join("");
 
-  const { base, tax } = igv(data.subtotal);
+  // IGV applies to the full total (products + delivery) — all Peru consumer prices include IGV
+  const { base: totalBase, tax: totalTax } = igv(data.total);
   const deliveryLine = formatDeliveryDate(data.deliveryDate, data.deliveryTimeRange);
   const addrLine = formatAddress(data.address);
 
@@ -250,15 +253,11 @@ export function buildCustomerConfirmationEmail(data: OrderEmailData): string {
       <tbody>${rows}</tbody>
     </table>
 
-    <!-- Totals with IGV -->
+    <!-- Totals with IGV breakdown -->
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;font-family:'DM Sans',Arial,sans-serif;">
       <tr>
-        <td style="padding:4px 0;font-size:13px;color:#999;">Subtotal (sin IGV)</td>
-        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${base.toFixed(2)}</td>
-      </tr>
-      <tr>
-        <td style="padding:4px 0;font-size:13px;color:#999;">IGV (18%)</td>
-        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${tax.toFixed(2)}</td>
+        <td style="padding:4px 0;font-size:13px;color:#999;">Productos</td>
+        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${data.subtotal.toFixed(2)}</td>
       </tr>
       <tr>
         <td style="padding:4px 0;font-size:13px;color:#999;">Delivery</td>
@@ -268,11 +267,22 @@ export function buildCustomerConfirmationEmail(data: OrderEmailData): string {
         <td colspan="2" style="padding:0;"><div style="border-top:1px solid ${BRAND.creamDark};margin:8px 0;"></div></td>
       </tr>
       <tr>
-        <td style="padding:4px 0;font-size:16px;color:${BRAND.charcoal};font-weight:bold;">Total pagado</td>
-        <td style="padding:4px 0;font-size:16px;color:${BRAND.charcoal};font-weight:bold;text-align:right;">S/ ${data.total.toFixed(2)}</td>
+        <td colspan="2" style="padding:0;"><div style="border-top:1px solid ${BRAND.creamDark};margin:6px 0;"></div></td>
       </tr>
       <tr>
-        <td colspan="2" style="padding:2px 0 0;font-size:11px;color:#aaa;text-align:right;">Incluye IGV</td>
+        <td style="padding:3px 0;font-size:13px;color:#999;">Valor de venta</td>
+        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${totalBase.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td style="padding:3px 0;font-size:13px;color:#999;">IGV (18%)</td>
+        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${totalTax.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td colspan="2" style="padding:0;"><div style="border-top:2px solid ${BRAND.creamDark};margin:6px 0;"></div></td>
+      </tr>
+      <tr>
+        <td style="padding:4px 0;font-size:16px;color:${BRAND.charcoal};font-weight:bold;">Total pagado</td>
+        <td style="padding:4px 0;font-size:16px;color:${BRAND.charcoal};font-weight:bold;text-align:right;">S/ ${data.total.toFixed(2)}</td>
       </tr>
     </table>
 
@@ -322,7 +332,7 @@ export function buildTeamNotificationEmail(data: OrderEmailData): string {
     )
     .join("");
 
-  const { base, tax } = igv(data.subtotal);
+  const { base: totalBase, tax: totalTax } = igv(data.total);
   const deliveryLine = formatDeliveryDate(data.deliveryDate, data.deliveryTimeRange);
   const addrLine = formatAddress(data.address);
 
@@ -386,19 +396,26 @@ export function buildTeamNotificationEmail(data: OrderEmailData): string {
     <!-- Totals -->
     <table width="280" cellpadding="0" cellspacing="0" align="right" style="margin-bottom:24px;">
       <tr>
-        <td style="padding:4px 0;font-size:13px;color:#999;">Subtotal (sin IGV)</td>
-        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${base.toFixed(2)}</td>
-      </tr>
-      <tr>
-        <td style="padding:4px 0;font-size:13px;color:#999;">IGV (18%)</td>
-        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${tax.toFixed(2)}</td>
+        <td style="padding:4px 0;font-size:13px;color:#999;">Productos</td>
+        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${data.subtotal.toFixed(2)}</td>
       </tr>
       <tr>
         <td style="padding:4px 0;font-size:13px;color:#999;">Delivery</td>
         <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${data.deliveryFee.toFixed(2)}</td>
       </tr>
       <tr>
-        <td colspan="2" style="padding:0;"><div style="border-top:2px solid ${BRAND.green};margin:8px 0;"></div></td>
+        <td colspan="2" style="padding:0;"><div style="border-top:1px solid #eee;margin:4px 0;"></div></td>
+      </tr>
+      <tr>
+        <td style="padding:3px 0;font-size:13px;color:#999;">Valor de venta</td>
+        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${totalBase.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td style="padding:3px 0;font-size:13px;color:#999;">IGV (18%)</td>
+        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${totalTax.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td colspan="2" style="padding:0;"><div style="border-top:2px solid ${BRAND.green};margin:6px 0;"></div></td>
       </tr>
       <tr>
         <td style="padding:4px 0;font-size:16px;color:${BRAND.charcoal};font-weight:bold;">Total</td>
