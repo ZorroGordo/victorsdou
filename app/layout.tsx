@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { DM_Sans, Caveat, Playfair_Display } from 'next/font/google'
+import { GTMScript, GTMNoScript } from '@/components/analytics/GTMScript'
 import './globals.css'
 
 // DM Sans - clean geometric sans-serif matching Figma
@@ -70,6 +71,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans bg-cream text-charcoal antialiased">
+        <GTMNoScript />
+        <GTMScript />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-green text-white px-4 py-2 z-50 rounded"

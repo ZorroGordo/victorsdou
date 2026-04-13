@@ -729,6 +729,12 @@ function getItemPrice(p){
   document.getElementById('summaryItems').innerHTML=html;
   document.getElementById('summarySubtotal').textContent='S/ '+cartSubtotal.toFixed(2);
   document.getElementById('summaryTotal').textContent='S/ '+cartSubtotal.toFixed(2);
+  /* GA4: begin_checkout */
+  try{
+    var gaItems=[];items.forEach(function(item){var p=item.product||item;gaItems.push({item_id:p.slug||p.sku||p.id||'',item_name:p.name||'',price:getItemPrice(p),currency:'PEN',quantity:item.quantity||1,item_brand:'Victorsdou'});});
+    window.dataLayer=window.dataLayer||[];window.dataLayer.push({ecommerce:null});
+    window.dataLayer.push({event:'begin_checkout',ecommerce:{currency:'PEN',value:Math.round(cartSubtotal*100)/100,items:gaItems}});
+  }catch(e){}
   // Update delivery display (shows "Selecciona distrito" by default)
   updateDelivery();
   // Pre-fill from user
@@ -839,6 +845,14 @@ async function doPay(){
         })
       });
     }catch(emailErr){ console.error('Email send error:',emailErr); }
+
+    /* GA4: purchase */
+    try{
+      var gaItems=[];items.forEach(function(item){var p=item.product||item;gaItems.push({item_id:p.slug||p.sku||p.id||'',item_name:p.name||'',price:getItemPrice(p),currency:'PEN',quantity:item.quantity||1,item_brand:'Victorsdou'});});
+      var igvAmount=Math.round((total-total/1.18)*100)/100;
+      window.dataLayer=window.dataLayer||[];window.dataLayer.push({ecommerce:null});
+      window.dataLayer.push({event:'purchase',ecommerce:{transaction_id:order.id,currency:'PEN',value:Math.round(total*100)/100,shipping:deliveryFee,tax:igvAmount,items:gaItems}});
+    }catch(e){}
 
     saveCart([]);
     showToast('¡Pago exitoso! Gracias por tu pedido.');

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { getStoreProducts, getCategories } from '@/lib/products'
 import { getDisplayPrice, formatPrice } from '@/lib/types'
 import type { Product } from '@/lib/types'
-import { TrackViewItemList } from '@/components/analytics/EcommerceTracking'
+import { TrackViewItemList, TrackSelectItemOnClick } from '@/components/analytics/EcommerceTracking'
 
 export const metadata: Metadata = {
   title: 'Tienda | Victorsdou',
@@ -124,6 +124,7 @@ function ProductCard({ product }: { product: Product }) {
   const formattedPrice = formatPrice(displayPrice)
 
   return (
+    <TrackSelectItemOnClick product={product}>
     <Link href={`/tienda/${product.sku}`}>
       <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 cursor-pointer h-full flex flex-col">
         {/* Image */}
@@ -158,5 +159,6 @@ function ProductCard({ product }: { product: Product }) {
         </div>
       </div>
     </Link>
+    </TrackSelectItemOnClick>
   )
 }

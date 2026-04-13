@@ -580,6 +580,13 @@ function renderCart(){
     el.innerHTML='<div class="cart-empty"><svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p>Tu carrito está vacío</p><a href="/tienda">EXPLORAR TIENDA</a></div>';
     return;
   }
+  /* GA4: view_cart */
+  try{
+    var gaItems=[];var gaValue=0;
+    items.forEach(function(item){var p=item.product||item;var pr=getItemPrice(p);var q=item.quantity||1;gaValue+=pr*q;gaItems.push({item_id:p.slug||p.sku||p.id||'',item_name:p.name||'',price:pr,currency:'PEN',quantity:q,item_brand:'Victorsdou'});});
+    window.dataLayer=window.dataLayer||[];window.dataLayer.push({ecommerce:null});
+    window.dataLayer.push({event:'view_cart',ecommerce:{currency:'PEN',value:Math.round(gaValue*100)/100,items:gaItems}});
+  }catch(e){}
   var total=0;
   var html='';
   items.forEach(function(item,idx){
