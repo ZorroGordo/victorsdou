@@ -78,6 +78,9 @@ export async function POST(req: NextRequest) {
     };
 
     // Send both emails concurrently
+    const ts = new Date().toISOString();
+    console.log(`[order-email ${ts}] Processing order #${orderId} | customer=${customerEmail} | team=${TEAM_EMAIL} | items=${(items || []).length} | total=S/${total}`);
+
     const [customerResult, teamResult] = await Promise.all([
       // 1. Customer confirmation
       sendEmail({
@@ -93,11 +96,14 @@ export async function POST(req: NextRequest) {
       }),
     ]);
 
+    console.log(`[order-email ${ts}] Results | customer: ${customerResult.ok ? "✓ sent" : "✗ " + customerResult.error} | team: ${teamResult.ok ? "✓ sent" : "✗ " + teamResult.error}`);
+
     return cors({
       ok: customerResult.ok || teamResult.ok,
       customer: customerResult,
       team: teamResult,
       debug: {
+        timestamp: ts,
         from: process.env.SES_FROM_EMAIL ?? "Victorsdou <hola@victorsdou.pe>",
         region: process.env.AWS_REGION ?? "sa-east-1",
         teamEmail: TEAM_EMAIL,

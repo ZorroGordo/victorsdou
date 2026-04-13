@@ -38,8 +38,10 @@ export async function sendEmail(opts: {
   }
 
   const from = process.env.SES_FROM_EMAIL ?? "Victorsdou <hola@victorsdou.pe>";
+  const ts = new Date().toISOString();
+  console.log(`[SES ${ts}] Sending email | from=${from} | to=${toAddresses.join(",")} | subject="${opts.subject}"`);
   try {
-    await ses.send(
+    const result = await ses.send(
       new SendEmailCommand({
         Source: from,
         Destination: { ToAddresses: toAddresses },
@@ -52,10 +54,14 @@ export async function sendEmail(opts: {
         },
       }),
     );
-    return { ok: true };
+    const messageId = result.MessageId ?? "unknown";
+    console.log(`[SES ${ts}] ✓ Email sent | messageId=${messageId} | to=${toAddresses.join(",")}`);
+    return { ok: true, messageId };
   } catch (err: any) {
     const errMsg = err?.message ?? String(err);
-    return { ok: false, error: `SES error: ${errMsg}` };
+    const errCode = err?.name ?? err?.Code ?? "UnknownError";
+    console.error(`[SES ${ts}] ✗ Email FAILED | error=${errCode}: ${errMsg} | to=${toAddresses.join(",")}`);
+    return { ok: false, error: `SES error (${errCode}): ${errMsg}` };
   }
 }
 
