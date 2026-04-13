@@ -77,8 +77,8 @@ export async function POST(req: NextRequest) {
       notes,
     };
 
-    // Send both emails concurrently (fire-and-forget style but we await for response)
-    const results = await Promise.allSettled([
+    // Send both emails concurrently
+    const [customerResult, teamResult] = await Promise.all([
       // 1. Customer confirmation
       sendEmail({
         to: customerEmail,
@@ -93,10 +93,18 @@ export async function POST(req: NextRequest) {
       }),
     ]);
 
-    const customerOk = results[0].status === "fulfilled";
-    const teamOk = results[1].status === "fulfilled";
-
-    return cors({ ok: true, customerEmailSent: customerOk, teamEmailSent: teamOk });
+    return cors({
+      ok: customerResult.ok || teamResult.ok,
+      customer: customerResult,
+      team: teamResult,
+      debug: {
+        from: process.env.SES_FROM_EMAIL ?? "Victorsdou <hola@victorsdou.pe>",
+        region: process.env.AWS_REGION ?? "sa-east-1",
+        teamEmail: TEAM_EMAIL,
+        hasAwsKey: !!process.env.AWS_ACCESS_KEY_ID,
+        hasAwsSecret: !!process.env.AWS_SECRET_ACCESS_KEY,
+      }
+    });
   } catch (err: any) {
     console.error("[send-order-email] Error:", err);
     return cors({ ok: false, error: err.message ?? "Internal error" }, 500);

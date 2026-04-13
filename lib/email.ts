@@ -27,15 +27,14 @@ export async function sendEmail(opts: {
   subject: string;
   html: string;
   text?: string;
-}): Promise<void> {
+}): Promise<{ ok: boolean; error?: string }> {
   const toAddresses = Array.isArray(opts.to) ? opts.to : [opts.to];
-  if (!toAddresses.length) return;
+  if (!toAddresses.length) return { ok: false, error: "No recipients" };
 
   const ses = getSES();
   if (!ses) {
-    console.log("[email] No AWS SES credentials — skipping send to:", toAddresses.join(", "));
-    console.log("[email] Subject:", opts.subject);
-    return;
+    const msg = `No AWS SES credentials (AWS_ACCESS_KEY_ID=${process.env.AWS_ACCESS_KEY_ID ? "set" : "missing"}, AWS_SECRET_ACCESS_KEY=${process.env.AWS_SECRET_ACCESS_KEY ? "set" : "missing"})`;
+    return { ok: false, error: msg };
   }
 
   const from = process.env.SES_FROM_EMAIL ?? "Victorsdou <hola@victorsdou.pe>";
@@ -53,9 +52,10 @@ export async function sendEmail(opts: {
         },
       }),
     );
-    console.log("[email] Sent to", toAddresses.join(", "), "|", opts.subject);
-  } catch (err) {
-    console.error("[email] SES error:", err);
+    return { ok: true };
+  } catch (err: any) {
+    const errMsg = err?.message ?? String(err);
+    return { ok: false, error: `SES error: ${errMsg}` };
   }
 }
 
