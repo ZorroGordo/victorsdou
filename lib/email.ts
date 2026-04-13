@@ -211,10 +211,21 @@ export interface OrderEmailData {
 // ── Helper: IGV breakdown ─────────────────────────────────────────────────
 // All customer-facing amounts (products + delivery) include IGV in Peru.
 // This extracts the base (valor de venta) and tax from an IGV-inclusive amount.
+function r2(n: number) { return Math.round(n * 100) / 100; }
+
 function igv(amountInclIgv: number) {
-  const base = amountInclIgv / 1.18;
-  const tax = amountInclIgv - base;
+  const base = r2(amountInclIgv / 1.18);
+  const tax = r2(amountInclIgv - base);
   return { base, tax };
+}
+
+// Compute consistent totals from items so email numbers always add up
+function computeTotals(data: OrderEmailData) {
+  const productSubtotal = r2(data.items.reduce((s, i) => s + r2(i.unitPrice * i.quantity), 0));
+  const delivery = r2(data.deliveryFee ?? 0);
+  const total = r2(productSubtotal + delivery);
+  const { base, tax } = igv(total);
+  return { productSubtotal, delivery, total, base, tax };
 }
 
 // ── Email 1: Customer order confirmation ──────────────────────────────────
@@ -230,8 +241,8 @@ export function buildCustomerConfirmationEmail(data: OrderEmailData): string {
     )
     .join("");
 
-  // IGV applies to the full total (products + delivery) — all Peru consumer prices include IGV
-  const { base: totalBase, tax: totalTax } = igv(data.total);
+  // Compute consistent totals from line items so numbers always add up
+  const t = computeTotals(data);
   const deliveryLine = formatDeliveryDate(data.deliveryDate, data.deliveryTimeRange);
   const addrLine = formatAddress(data.address);
 
@@ -263,11 +274,11 @@ export function buildCustomerConfirmationEmail(data: OrderEmailData): string {
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;font-family:'DM Sans',Arial,sans-serif;">
       <tr>
         <td style="padding:4px 0;font-size:13px;color:#999;">Productos</td>
-        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${data.subtotal.toFixed(2)}</td>
+        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${t.productSubtotal.toFixed(2)}</td>
       </tr>
       <tr>
         <td style="padding:4px 0;font-size:13px;color:#999;">Delivery</td>
-        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${data.deliveryFee.toFixed(2)}</td>
+        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${t.delivery.toFixed(2)}</td>
       </tr>
       <tr>
         <td colspan="2" style="padding:0;"><div style="border-top:1px solid ${BRAND.creamDark};margin:8px 0;"></div></td>
@@ -277,18 +288,18 @@ export function buildCustomerConfirmationEmail(data: OrderEmailData): string {
       </tr>
       <tr>
         <td style="padding:3px 0;font-size:13px;color:#999;">Valor de venta</td>
-        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${totalBase.toFixed(2)}</td>
+        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${t.base.toFixed(2)}</td>
       </tr>
       <tr>
         <td style="padding:3px 0;font-size:13px;color:#999;">IGV (18%)</td>
-        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${totalTax.toFixed(2)}</td>
+        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${t.tax.toFixed(2)}</td>
       </tr>
       <tr>
         <td colspan="2" style="padding:0;"><div style="border-top:2px solid ${BRAND.creamDark};margin:6px 0;"></div></td>
       </tr>
       <tr>
         <td style="padding:4px 0;font-size:16px;color:${BRAND.charcoal};font-weight:bold;">Total pagado</td>
-        <td style="padding:4px 0;font-size:16px;color:${BRAND.charcoal};font-weight:bold;text-align:right;">S/ ${data.total.toFixed(2)}</td>
+        <td style="padding:4px 0;font-size:16px;color:${BRAND.charcoal};font-weight:bold;text-align:right;">S/ ${t.total.toFixed(2)}</td>
       </tr>
     </table>
 
@@ -338,7 +349,7 @@ export function buildTeamNotificationEmail(data: OrderEmailData): string {
     )
     .join("");
 
-  const { base: totalBase, tax: totalTax } = igv(data.total);
+  const t = computeTotals(data);
   const deliveryLine = formatDeliveryDate(data.deliveryDate, data.deliveryTimeRange);
   const addrLine = formatAddress(data.address);
 
@@ -360,7 +371,7 @@ export function buildTeamNotificationEmail(data: OrderEmailData): string {
             <p style="margin:2px 0 0;font-size:13px;color:#666;">Pedido <strong>#${data.orderId.slice(-8).toUpperCase()}</strong> \u00b7 ${new Date().toLocaleString("es-PE", { timeZone: "America/Lima" })}</p>
           </td>
           <td style="text-align:right;vertical-align:middle;">
-            <p style="margin:0;font-size:22px;color:${BRAND.green};font-weight:700;">S/ ${data.total.toFixed(2)}</p>
+            <p style="margin:0;font-size:22px;color:${BRAND.green};font-weight:700;">S/ ${t.total.toFixed(2)}</p>
           </td>
         </tr>
       </table>
@@ -403,29 +414,29 @@ export function buildTeamNotificationEmail(data: OrderEmailData): string {
     <table width="280" cellpadding="0" cellspacing="0" align="right" style="margin-bottom:24px;">
       <tr>
         <td style="padding:4px 0;font-size:13px;color:#999;">Productos</td>
-        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${data.subtotal.toFixed(2)}</td>
+        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${t.productSubtotal.toFixed(2)}</td>
       </tr>
       <tr>
         <td style="padding:4px 0;font-size:13px;color:#999;">Delivery</td>
-        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${data.deliveryFee.toFixed(2)}</td>
+        <td style="padding:4px 0;font-size:13px;color:#999;text-align:right;">S/ ${t.delivery.toFixed(2)}</td>
       </tr>
       <tr>
         <td colspan="2" style="padding:0;"><div style="border-top:1px solid #eee;margin:4px 0;"></div></td>
       </tr>
       <tr>
         <td style="padding:3px 0;font-size:13px;color:#999;">Valor de venta</td>
-        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${totalBase.toFixed(2)}</td>
+        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${t.base.toFixed(2)}</td>
       </tr>
       <tr>
         <td style="padding:3px 0;font-size:13px;color:#999;">IGV (18%)</td>
-        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${totalTax.toFixed(2)}</td>
+        <td style="padding:3px 0;font-size:13px;color:#999;text-align:right;">S/ ${t.tax.toFixed(2)}</td>
       </tr>
       <tr>
         <td colspan="2" style="padding:0;"><div style="border-top:2px solid ${BRAND.green};margin:6px 0;"></div></td>
       </tr>
       <tr>
         <td style="padding:4px 0;font-size:16px;color:${BRAND.charcoal};font-weight:bold;">Total</td>
-        <td style="padding:4px 0;font-size:16px;color:${BRAND.charcoal};font-weight:bold;text-align:right;">S/ ${data.total.toFixed(2)}</td>
+        <td style="padding:4px 0;font-size:16px;color:${BRAND.charcoal};font-weight:bold;text-align:right;">S/ ${t.total.toFixed(2)}</td>
       </tr>
     </table>
     <div style="clear:both;"></div>
