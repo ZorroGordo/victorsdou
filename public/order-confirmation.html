@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido Confirmado — Victorsdou</title>
+<meta name="description" content="Tu pedido ha sido confirmado. Gracias por comprar en Victorsdou.">
+<link rel="canonical" href="https://victorsdou.pe/order-confirmation">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'DM Sans',sans-serif;color:#1a1a1a;background:#faf9f7;min-height:100vh;display:flex;flex-direction:column}
+  .nav{background:#fff;border-bottom:1px solid #eee;padding:16px 0;position:sticky;top:0;z-index:100}
+  .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:center}
+  .nav-logo img{height:48px}
+  .confirmation-wrapper{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 24px}
+  .confirmation-card{background:#fff;border-radius:16px;padding:48px;max-width:600px;width:100%;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+  .check-icon{width:72px;height:72px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
+  .check-icon svg{width:36px;height:36px;color:#2e7d32}
+  h1{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;margin-bottom:8px;color:#1a1a1a}
+  .subtitle{font-size:16px;color:#666;margin-bottom:32px}
+  .order-number{display:inline-block;background:#faf9f7;border:1px solid #e5e2de;border-radius:8px;padding:12px 24px;font-size:18px;font-weight:600;letter-spacing:1px;margin-bottom:32px;color:#8b6f47}
+  .order-details{text-align:left;border-top:1px solid #f0ede8;padding-top:24px;margin-bottom:32px}
+  .order-details h3{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:16px;color:#1a1a1a}
+  .detail-row{display:flex;justify-content:space-between;padding:8px 0;font-size:14px;color:#555}
+  .detail-row .label{color:#999}
+  .detail-row .value{font-weight:500;color:#1a1a1a}
+  .items-list{margin:16px 0}
+  .item-row{display:flex;justify-content:space-between;padding:6px 0;font-size:14px;border-bottom:1px solid #f5f3f0}
+  .item-row:last-child{border-bottom:none}
+  .item-name{color:#333}
+  .item-price{color:#8b6f47;font-weight:500}
+  .totals{border-top:1px solid #e5e2de;padding-top:12px;margin-top:12px}
+  .totals .detail-row{font-size:15px}
+  .totals .total-row{font-weight:600;font-size:17px;color:#1a1a1a;padding-top:8px;border-top:1px solid #e5e2de;margin-top:8px}
+  .delivery-info{background:#faf9f7;border-radius:8px;padding:16px;margin-top:16px;font-size:14px;color:#555;text-align:left}
+  .delivery-info strong{color:#1a1a1a}
+  .actions{display:flex;gap:12px;justify-content:center;margin-top:32px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:14px 32px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .2s}
+  .btn-primary{background:#1a1a1a;color:#fff}
+  .btn-primary:hover{background:#333}
+  .btn-secondary{background:#fff;color:#1a1a1a;border:1px solid #ddd}
+  .btn-secondary:hover{border-color:#999}
+  .footer{background:#1a1a1a;color:#fff;padding:40px 24px;text-align:center;font-size:13px;margin-top:auto}
+  .footer a{color:#ccc;text-decoration:none}
+  @media(max-width:640px){
+    .confirmation-card{padding:32px 20px}
+    h1{font-size:24px}
+    .actions{flex-direction:column}
+    .btn{width:100%;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="/images/logo.svg" alt="Victorsdou" onerror="this.onerror=null;this.textContent='VICTORSDOU';this.style.fontSize='20px';this.style.fontFamily='Playfair Display';this.style.fontWeight='700';this.style.color='#1a1a1a';this.style.textDecoration='none'"></a>
+  </div>
+</nav>
+
+<div class="confirmation-wrapper">
+  <div class="confirmation-card" id="confirmationCard">
+    <div class="check-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <h1>Pedido Confirmado</h1>
+    <p class="subtitle">Gracias por tu compra. Hemos recibido tu pedido y lo estamos preparando.</p>
+    <div class="order-number" id="orderNumber">---</div>
+
+    <div class="order-details" id="orderDetails">
+      <h3>Resumen del pedido</h3>
+      <div class="items-list" id="itemsList"></div>
+      <div class="totals">
+        <div class="detail-row"><span class="label">Subtotal</span><span class="value" id="subtotalVal">-</span></div>
+        <div class="detail-row"><span class="label">Delivery</span><span class="value" id="deliveryVal">-</span></div>
+        <div class="detail-row total-row"><span class="label">Total</span><span class="value" id="totalVal">-</span></div>
+      </div>
+    </div>
+
+    <div class="delivery-info" id="deliveryInfo" style="display:none">
+      <strong>Entrega programada</strong><br>
+      <span id="deliveryDate">-</span> &middot; <span id="deliveryTime">-</span><br>
+      <span id="deliveryAddress">-</span>
+    </div>
+
+    <div class="actions">
+      <a href="/tienda" class="btn btn-primary">Volver a la tienda</a>
+      <a href="https://wa.me/51987741544" target="_blank" class="btn btn-secondary">Contactar por WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2026 @victorsdou | Victor Dou SAC | RUC: 20606963123. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+(function(){
+  // Read order data from sessionStorage (set by checkout page)
+  var raw = sessionStorage.getItem('victorsdou-order-confirmation');
+  if (!raw) {
+    // Fallback: just show the order number from URL params
+    var params = new URLSearchParams(window.location.search);
+    var num = params.get('number') || params.get('id') || '';
+    if (num) {
+      document.getElementById('orderNumber').textContent = '#' + num;
+    } else {
+      document.getElementById('orderNumber').textContent = '';
+    }
+    document.getElementById('orderDetails').style.display = 'none';
+    return;
+  }
+
+  var order;
+  try { order = JSON.parse(raw); } catch(e) { return; }
+
+  // Clean up sessionStorage
+  sessionStorage.removeItem('victorsdou-order-confirmation');
+
+  // Order number
+  document.getElementById('orderNumber').textContent = '#' + (order.orderNumber || order.id || '');
+
+  // Items
+  var itemsHtml = '';
+  (order.items || []).forEach(function(item) {
+    var name = item.name || item.productName || 'Producto';
+    var qty = item.quantity || 1;
+    var price = item.unitPrice || item.price || 0;
+    var lineTotal = (price * qty);
+    itemsHtml += '<div class="item-row"><span class="item-name">' + name + (qty > 1 ? ' x' + qty : '') + '</span><span class="item-price">S/ ' + lineTotal.toFixed(2) + '</span></div>';
+  });
+  document.getElementById('itemsList').innerHTML = itemsHtml;
+
+  // Totals
+  document.getElementById('subtotalVal').textContent = 'S/ ' + (order.subtotal || 0).toFixed(2);
+  document.getElementById('deliveryVal').textContent = 'S/ ' + (order.deliveryFee || 0).toFixed(2);
+  document.getElementById('totalVal').textContent = 'S/ ' + (order.total || 0).toFixed(2);
+
+  // Delivery info
+  if (order.deliveryDate || order.address) {
+    document.getElementById('deliveryInfo').style.display = 'block';
+    document.getElementById('deliveryDate').textContent = order.deliveryDate || '-';
+    document.getElementById('deliveryTime').textContent = order.deliveryTimeLabel || order.deliveryTimeRange || '-';
+    var addr = order.address || {};
+    document.getElementById('deliveryAddress').textContent = [addr.street, addr.district, addr.city].filter(Boolean).join(', ');
+  }
+})();
+</script>
+</body>
+</html>
