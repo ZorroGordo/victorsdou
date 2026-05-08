@@ -64,23 +64,6 @@ const nextConfig = {
       { source: '/product-category/:slug/', destination: '/tienda', permanent: true },
       { source: '/product-category/:slug', destination: '/tienda', permanent: true },
 
-      // Old WordPress recipe URLs → /recetas
-      { source: '/recetas/focaccia-jamon-y-burrata/', destination: '/recetas', permanent: true },
-      { source: '/recetas/focaccia-jamon-y-burrata', destination: '/recetas', permanent: true },
-      { source: '/recetas/focaccia-prosciutto/', destination: '/recetas', permanent: true },
-      { source: '/recetas/focaccia-prosciutto', destination: '/recetas', permanent: true },
-      { source: '/recetas/cacio-e-pepe-scrambled-eggs-toast/', destination: '/recetas', permanent: true },
-      { source: '/recetas/cacio-e-pepe-scrambled-eggs-toast', destination: '/recetas', permanent: true },
-      { source: '/recetas/mixto-baguette/', destination: '/recetas', permanent: true },
-      { source: '/recetas/mixto-baguette', destination: '/recetas', permanent: true },
-      { source: '/recetas/pollo-desmenuzado-palta-seeded-sandwich/', destination: '/recetas', permanent: true },
-      { source: '/recetas/pollo-desmenuzado-palta-seeded-sandwich', destination: '/recetas', permanent: true },
-      { source: '/recetas/sandwich-de-costillas/', destination: '/recetas', permanent: true },
-      { source: '/recetas/sandwich-de-costillas', destination: '/recetas', permanent: true },
-      { source: '/recetas/pizza-margherita/', destination: '/recetas', permanent: true },
-      { source: '/recetas/pizza-margherita', destination: '/recetas', permanent: true },
-      // Catch-all for any other old /recetas/ sub-URLs
-      { source: '/recetas/:slug/', destination: '/recetas', permanent: true },
 
       // Old English URLs → Spanish equivalents
       { source: '/en/home-en/', destination: '/', permanent: true },
