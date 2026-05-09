@@ -30,12 +30,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://victorsdou.pe/recetas</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
   <!-- Blog articles - Educational -->
   <url>
     <loc>https://victorsdou.pe/blog-como-hacer-masa-madre-en-casa</loc>
@@ -251,4 +245,56 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Recipe pages -->
+  <url><loc>https://victorsdou.pe/recetas</loc><lastmod>2026-05-08</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/fried-chicken-caprese-sandwich</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/fried-chicken-napolitana-sandwich</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/grilled-three-cheeses-with-caramelized-onions-sandwich</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/entrana-sandwich</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/steak-sandwich-con-chimichurri</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/pollo-desmenuzado-con-palta-pan-seeded</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/tuna-and-avocado-sandwich</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/sandwich-de-costillas-pan-de-mie</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/mixto-baguette</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/grilled-ham-and-cheese-sandwich-mixto</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/btl-bacon-lettuce-and-tomato</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/shrimp-sandwich</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/egg-salad-sandwich</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/cacio-e-pepe-scrambled-eggs-toast</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/smoked-salmon-and-scrambled-eggs-toast</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/burrata-parma-and-peach-jam-toast</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/crispy-yolks-on-toast</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/tomatoes-parma-and-burrata-toast</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/goats-cheese-and-fig-jam-toast</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/tostada-con-champinones-queso-de-cabra-y-miel</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/supreme-breakfast-toast</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/breakfast-duo</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/whipped-ricotta-y-miel</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/whipped-browned-butter</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/brown-sugar-toast</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/hummus-y-pan</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/grilled-zucchini-focaccia</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/focaccia-jamon-y-burrata</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/focaccia-prosciutto</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/pizza-margherita</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/pepperoni-pizza</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/pizza-para-todos</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/ciabatta-with-meatballs</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/whole-cheese-and-garlic-bread</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/pan-con-ajo-y-queso</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/french-toast-pan-de-mie</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/cookies-and-cream-con-salted-caramel</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/crispy-chicken-pesto-pan-campesino</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/bta-bacon-tomato-and-avocado-pan-campesino</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/hot-dog-brioche-con-chimichurri</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/crispy-flat-croissant-con-chocolate</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/brioche-burger-bun-con-jamon-frances</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/budin-de-pan-brioche-con-helado</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/steak-frites-sandwich</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/sandwich-de-ragu-y-queso</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/sandwich-de-helado</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/egg-sandwich-on-crispy-brioche</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/smash-burger-on-victor-s-papa-buns</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/tostada-francesa-con-helado</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://victorsdou.pe/recetas/focaccia-con-jamon-y-pistacho</loc><lastmod>2026-05-08</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
