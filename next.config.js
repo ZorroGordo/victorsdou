@@ -81,7 +81,70 @@ const nextConfig = {
       // www → non-www is handled by Vercel, but just in case
       // Old WordPress archive/feed URLs
       { source: '/recetas/:slug/feed/', destination: '/recetas', permanent: true },
+      { source: '/recetas/:slug/feed', destination: '/recetas', permanent: true },
       { source: '/recetas/:year/:month/', destination: '/recetas', permanent: true },
+      { source: '/recetas/:year/:month', destination: '/recetas', permanent: true },
+      { source: '/recetas/feed/', destination: '/recetas', permanent: true },
+      { source: '/recetas/feed', destination: '/recetas', permanent: true },
+      { source: '/recetas/page/:n', destination: '/recetas', permanent: true },
+      { source: '/recetas/page/:n/', destination: '/recetas', permanent: true },
+      { source: '/recetas/author/:path*', destination: '/recetas', permanent: true },
+      { source: '/recetas/category/:path*', destination: '/recetas', permanent: true },
+
+      // Old WordPress shop/cart/feed URLs
+      { source: '/shop/page/:n', destination: '/tienda', permanent: true },
+      { source: '/shop/page/:n/', destination: '/tienda', permanent: true },
+      { source: '/shop/feed/', destination: '/tienda', permanent: true },
+      { source: '/shop/feed', destination: '/tienda', permanent: true },
+      { source: '/cart/:path*', destination: '/tienda', permanent: true },
+      { source: '/product-tag/:path*', destination: '/tienda', permanent: true },
+
+      // Backend / ERP API paths that briefly leaked into Google's index — send to home
+      { source: '/auth/:path*', destination: '/', permanent: true },
+      { source: '/payments/:path*', destination: '/tienda', permanent: true },
+      { source: '/orders', destination: '/tienda', permanent: true },
+      { source: '/orders/', destination: '/tienda', permanent: true },
+      { source: '/subscriptions', destination: '/tienda', permanent: true },
+      { source: '/subscriptions/', destination: '/tienda', permanent: true },
+      { source: '/recuperar', destination: '/', permanent: true },
+      { source: '/recuperar/', destination: '/', permanent: true },
+
+      // Old WordPress search template-literal leaks
+      { source: '/search/:path*', destination: '/', permanent: true },
+
+      // Old root-level WordPress pages and attachment slugs
+      { source: '/download', destination: '/', permanent: true },
+      { source: '/download/', destination: '/', permanent: true },
+      { source: '/download-2', destination: '/', permanent: true },
+      { source: '/download-2/', destination: '/', permanent: true },
+      { source: '/download-2-2', destination: '/', permanent: true },
+      { source: '/download-2-2/', destination: '/', permanent: true },
+      { source: '/terminos-servicio', destination: '/terminos', permanent: true },
+      { source: '/terminos-servicio/', destination: '/terminos', permanent: true },
+      { source: '/masa-pizza', destination: '/tienda', permanent: true },
+      { source: '/masa-pizza/', destination: '/tienda', permanent: true },
+      { source: '/pack-integral', destination: '/tienda', permanent: true },
+      { source: '/pack-integral/', destination: '/tienda', permanent: true },
+      { source: '/pack-integral-1', destination: '/tienda', permanent: true },
+      { source: '/pack-integral-1/', destination: '/tienda', permanent: true },
+      { source: '/logo', destination: '/', permanent: true },
+      { source: '/logo/', destination: '/', permanent: true },
+      { source: '/logos-victorsdouartboard-2', destination: '/', permanent: true },
+      { source: '/logos-victorsdouartboard-2/', destination: '/', permanent: true },
+      { source: '/cropped-cropped-logo-e1643651797989', destination: '/', permanent: true },
+      { source: '/cropped-cropped-logo-e1643651797989/', destination: '/', permanent: true },
+      { source: '/screen-usage-1', destination: '/', permanent: true },
+      { source: '/screen-usage-1/', destination: '/', permanent: true },
+      { source: '/whatsapp-image-:slug', destination: '/', permanent: true },
+      { source: '/whatsapp-image-:slug/', destination: '/', permanent: true },
+
+      // Three root-level WordPress blog slugs that lost their /blog/ prefix
+      { source: '/blog-pan-artesanal-ninos', destination: '/blog', permanent: true },
+      { source: '/blog-pan-artesanal-ninos/', destination: '/blog', permanent: true },
+      { source: '/blog-pan-chia-quinua-peru', destination: '/blog', permanent: true },
+      { source: '/blog-pan-chia-quinua-peru/', destination: '/blog', permanent: true },
+      { source: '/blog-fermentados-microbiota', destination: '/blog', permanent: true },
+      { source: '/blog-fermentados-microbiota/', destination: '/blog', permanent: true },
     ]
   },
 }

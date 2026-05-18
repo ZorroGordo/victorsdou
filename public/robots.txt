@@ -1,4 +1,19 @@
 User-agent: *
 Allow: /
 
+# Backend / API paths — should never be crawled
+Disallow: /api/
+Disallow: /auth/
+Disallow: /payments/
+Disallow: /orders
+Disallow: /subscriptions
+Disallow: /recuperar
+
+# Legacy WordPress system paths (kept around so old indexed URLs stop being recrawled)
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /*?add-to-cart=
+Disallow: /*?amp=
+
 Sitemap: https://victorsdou.pe/sitemap.xml
